@@ -10,9 +10,9 @@ const user = createSlice({
       return action.payload;
     },
     loginError: () => {
-      return { error: "Error logging in, please try again" };
+      return {error: "Error logging in, please try again"};
     },
-    logOut: (user) => {
+    logOut: () => {
       return initialState;
     }
   },
