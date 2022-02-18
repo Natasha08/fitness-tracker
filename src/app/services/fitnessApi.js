@@ -26,7 +26,7 @@ const fitnessApi = createApi({
 
 export const {
   reducer:fitnessApiReducer,
-  middleware:fitnessApimiddleware,
+  middleware:fitnessApiMiddleware,
   reducerPath:fitnessApiPath,
   useLoginMutation,
 } = fitnessApi;

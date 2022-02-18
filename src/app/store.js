@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import {fitnessApiPath, fitnessApiReducer, fitnessApimiddleware} from './services/fitnessApi';
+import {fitnessApiPath, fitnessApiReducer, fitnessApiMiddleware} from './services/fitnessApi';
 import userReducer from './reducers/user';
 
 const store = configureStore({
@@ -9,7 +9,7 @@ const store = configureStore({
     user: userReducer
   },
   middleware: (gDM) =>
-    gDM().concat(fitnessApimiddleware),
+    gDM().concat(fitnessApiMiddleware),
 });
 
 setupListeners(store.dispatch);
