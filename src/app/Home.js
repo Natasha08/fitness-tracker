@@ -4,7 +4,7 @@ import {
   Route,
 } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Input, InputLabel, Button, Box } from '@mui/material';
+import { Input, InputLabel, Button } from '@mui/material';
 
 import Nutrition from './Nutrition.js';
 import BottomNavigation from './BottomNavigation';
@@ -33,12 +33,12 @@ export default function Home() {
   }
 
   return (
-    <Box>
+    <div className="App">
       <Header/>
 
       {user?.error && <div>{user.error}</div>}
       {!user?.token ? (
-        <Box>
+        <div className="Main">
           <form>
             <InputLabel>
               Email
@@ -50,20 +50,24 @@ export default function Home() {
             </InputLabel>
             <Button variant="contained" onClick={(e) => login(e)}>Login</Button>
           </form>
-        </Box>
+        </div>
       ) : (
-        <Box>
-            Welcome!
-          <Routes>
-            <Route path="/nutrition" element={<Nutrition/>}/>
-            <Route path="/" element={<div></div>}/>
-          </Routes>
-          <Button variant="contained" onClick={logout}>Logout</Button>
-          <footer>
-            <BottomNavigation />
-          </footer>
-        </Box>
+        <>
+          <div className="Main">
+              Welcome!
+            <Routes>
+              <Route path="/nutrition" element={<Nutrition/>}/>
+              <Route path="/" element={<div></div>}/>
+            </Routes>
+            <Button variant="contained" onClick={logout}>Logout</Button>
+          </div>
+          <div className="Footer">
+            <footer>
+              <BottomNavigation />
+            </footer>
+          </div>
+        </>
       )}
-    </Box>
+    </div>
   );
 }
