@@ -21,7 +21,9 @@ export default function Home() {
   const user = useSelector(({user}) => user);
 
 
-  function login() {
+  function login(e) {
+    e.preventDefault();
+
     loginUser({email, password});
   }
 
@@ -42,7 +44,7 @@ export default function Home() {
             Password
             <input onChange={({target}) => setPassword(target.value)} />
           </label>
-          <button onClick={login}>Login</button>
+          <button onClick={(e) => login(e)}>Login</button>
         </form>
       ) : (
         <div>

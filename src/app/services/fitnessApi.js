@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { loggedIn } from '../reducers/user';
+import { loggedIn, loginError } from '../reducers/user';
 
 const fitnessApi = createApi({
   reducerPath: 'fitnessApi',
@@ -16,8 +16,8 @@ const fitnessApi = createApi({
         try {
           const {data} = await queryFulfilled;
           dispatch(loggedIn(data));
-        } catch (err) {
-          dispatch(loggedIn(err));
+        } catch {
+          dispatch(loginError());
         }
       },
     }),
