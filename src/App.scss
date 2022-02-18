@@ -6,24 +6,13 @@ body {
   height: 100vh;
   padding-top: 75px;
 
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  grid-template-areas:
-    'header'
-    'main'
-    'footer';
-
-  .Header {
-    grid-area: header;
-  }
-
   .Main {
-    grid-area: main;
     padding: 25px 5px 10px 5px;
   }
 
   .Footer {
-    grid-area: footer;
+    position: absolute;
+    bottom: 10px;
   }
 }
 
