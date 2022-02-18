@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
 
 const persistConfig = {
   key: 'root',
-  storage: storage('fitnessApiPath'),
+  storage: storage('Fitness-Tracker-development'),
   stateReconciler: hardSet,
 };
 
