@@ -12,20 +12,18 @@ export default function Home() {
   const [
     loginUser,
     result
-  ] = useLoginMutation({fixedCacheKey: 'user-auth'})
-
-  useEffect(() => {
-    if (!user) {
-      if (result.data) setUser(result.data);
-    }
-  }, [result.data, user]);
+  ] = useLoginMutation({fixedCacheKey: 'user-auth'});
 
   function login() {
-    loginUser({email: "natasha@example.com", password: "password"});
+    loginUser({email: "natasha@example.com", password: "password"})
+      .unwrap()
+      .then((payload) => setUser(payload))
+      .catch(() => setUser({error: 'failed to login to server'}));
   }
 
   return (
     <div>
+      {user?.error && <div>{user.error}</div>}
       {!user?.token ? (
       <button onClick={login}>Login</button>
       ) : (
