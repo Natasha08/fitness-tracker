@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Routes,
   Route,
@@ -10,6 +10,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { logOut } from './reducers/user';
 
 export default function Home() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const dispatch = useDispatch();
   const [
     loginUser,
@@ -17,8 +20,9 @@ export default function Home() {
   ] = useLoginMutation({fixedCacheKey: 'user-auth'});
   const user = useSelector(({user}) => user);
 
+
   function login() {
-    loginUser({email: "natasha@example.com", password: "password"})
+    loginUser({email, password});
   }
 
   function logout() {
@@ -29,7 +33,17 @@ export default function Home() {
     <div>
       {user?.error && <div>{user.error}</div>}
       {!user?.token ? (
-      <button onClick={login}>Login</button>
+        <form>
+          <label>
+            Email
+            <input onChange={({target}) => setEmail(target.value)}/>
+          </label>
+          <label>
+            Password
+            <input onChange={({target}) => setPassword(target.value)} />
+          </label>
+          <button onClick={login}>Login</button>
+        </form>
       ) : (
         <div>
             {user?.email}
