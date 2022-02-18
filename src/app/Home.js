@@ -14,10 +14,7 @@ export default function Home() {
   const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
-  const [
-    loginUser,
-    result
-  ] = useLoginMutation({fixedCacheKey: 'user-auth'});
+  const [loginUser] = useLoginMutation({fixedCacheKey: 'user-auth'});
   const user = useSelector(({user}) => user);
 
 
