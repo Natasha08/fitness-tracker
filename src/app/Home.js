@@ -1,24 +1,28 @@
-import React, { useEffect, useState } from "react";
-import { useLoginMutation } from './services/user';
+import React from "react";
 import {
   Routes,
   Route,
   Link
 } from "react-router-dom";
 import Nutrition from './Nutrition.js';
+import { useLoginMutation } from './services/fitnessApi';
+import { useDispatch, useSelector } from "react-redux";
+import { logOut } from './reducers/user';
 
 export default function Home() {
-  const [user, setUser] = useState(null);
+  const dispatch = useDispatch();
   const [
     loginUser,
     result
   ] = useLoginMutation({fixedCacheKey: 'user-auth'});
+  const user = useSelector(({user}) => user);
 
   function login() {
     loginUser({email: "natasha@example.com", password: "password"})
-      .unwrap()
-      .then((payload) => setUser(payload))
-      .catch(() => setUser({error: 'failed to login to server'}));
+  }
+
+  function logout() {
+    dispatch(logOut());
   }
 
   return (
@@ -43,6 +47,7 @@ export default function Home() {
             <Route path="/nutrition" element={<Nutrition/>}/>
             <Route path="/" element={<div></div>}/>
           </Routes>
+          <button onClick={logout}>Logout</button>
         </div>
       )}
     </div>

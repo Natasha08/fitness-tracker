@@ -1,5 +1,5 @@
 import React from "react";
-import { useLoginMutation } from './services/user';
+import { useLoginMutation } from './services/fitnessApi';
 
 export default function Nutrition() {
   const [

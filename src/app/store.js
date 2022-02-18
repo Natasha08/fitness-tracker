@@ -1,13 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import {reducerPath, reducer, middleware} from './services/user';
+import {fitnessApiPath, fitnessApiReducer, fitnessApimiddleware} from './services/fitnessApi';
+import userReducer from './reducers/user';
 
 const store = configureStore({
   reducer: {
-    [reducerPath]: reducer,
+    [fitnessApiPath]: fitnessApiReducer,
+    user: userReducer
   },
   middleware: (gDM) =>
-    gDM().concat(middleware),
+    gDM().concat(fitnessApimiddleware),
 });
 
 setupListeners(store.dispatch);
