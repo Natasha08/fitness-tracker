@@ -4,9 +4,9 @@ body {
 
 .App {
   height: 100vh;
+  padding-top: 75px;
 
   display: grid;
-  grid-template-columns: 1fr;
   grid-template-rows: auto 1fr auto;
   grid-template-areas:
     'header'
@@ -19,7 +19,7 @@ body {
 
   .Main {
     grid-area: main;
-    padding: 50px 5px 10px 5px;
+    padding: 25px 5px 10px 5px;
   }
 
   .Footer {
@@ -67,4 +67,14 @@ body {
   100% {
     transform: translateY(0px);
   }
+}
+
+.login-form {
+  display: grid;
+  grid-template-columns: 20rem;
+  grid-template-rows: 5rem 5rem 3rem;
+  grid-template-areas:
+    'input'
+    'input'
+    'button';
 }

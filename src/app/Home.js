@@ -4,7 +4,7 @@ import {
   Route,
 } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, Grid } from '@mui/material';
 
 import Nutrition from './Nutrition.js';
 import BottomNavigation from './BottomNavigation';
@@ -28,27 +28,30 @@ export default function Home() {
   }
 
   return (
-    <div className="App">
+    <Grid className="App"
+      container
+      spacing={0}
+      direction="column"
+      alignItems="center"
+    >
       <Header/>
       <ResponsiveDrawer/>
 
       {user?.error && <div>{user.error}</div>}
       {!user?.token ? (
         <div className="Main">
-          <form>
+          <form className="login-form">
             <TextField
               id="outlined-textarea"
               label="Enter your Email"
               placeholder="Email"
               onChange={({target}) => setEmail(target.value)}
-              fullWidth
             />
             <TextField
               id="outlined-textarea"
               label="Enter your Password"
               placeholder="Password"
               onChange={({target}) => setPassword(target.value)}
-              fullWidth
             />
             <Button variant="contained" onClick={(e) => login(e)}>Login</Button>
           </form>
@@ -69,6 +72,6 @@ export default function Home() {
           </div>
         </>
       )}
-    </div>
+    </Grid>
   );
 }
