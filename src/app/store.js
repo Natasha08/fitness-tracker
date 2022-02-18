@@ -1,17 +1,33 @@
+import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import {fitnessApiPath, fitnessApiReducer, fitnessApiMiddleware} from './services/fitnessApi';
-import userReducer from './reducers/user';
+import { persistReducer, PERSIST, REGISTER } from 'redux-persist';
+import storage from 'redux-persist-indexeddb-storage';
+import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
 
-const store = configureStore({
-  reducer: {
-    [fitnessApiPath]: fitnessApiReducer,
-    user: userReducer
-  },
-  middleware: (gDM) =>
-    gDM().concat(fitnessApiMiddleware),
+import userReducer from './reducers/user';
+import {fitnessApiPath, fitnessApiReducer, fitnessApiMiddleware} from './services/fitnessApi';
+
+const rootReducer = combineReducers({
+  [fitnessApiPath]: fitnessApiReducer,
+  user: userReducer
 });
 
+const persistConfig = {
+  key: 'root',
+  storage: storage('fitnessApiPath'),
+  stateReconciler: hardSet,
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (gDM) => (
+    gDM({serializableCheck: {ignoredActions: [PERSIST, REGISTER]}})
+    .concat(fitnessApiMiddleware)
+  )
+});
 setupListeners(store.dispatch);
 
 export default store;

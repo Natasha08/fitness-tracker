@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Routes,
   Route,
   Link
-} from "react-router-dom";
+} from 'react-router-dom';
 import Nutrition from './Nutrition.js';
 import { useLoginMutation } from './services/fitnessApi';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from './reducers/user';
 
 export default function Home() {
