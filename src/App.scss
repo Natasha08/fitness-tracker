@@ -1,3 +1,11 @@
+body {
+  font-family: "Roboto";
+}
+
+.App {
+  height: 100vh;
+}
+
 .App {
   text-align: center;
 }
@@ -30,10 +38,19 @@
   0% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(10px);
   }
+
   100% {
     transform: translateY(0px);
   }
 }
+
+.spam {
+  display: grid;
+  height: 100vh;
+  grid-template-columns:  auto;
+}
+

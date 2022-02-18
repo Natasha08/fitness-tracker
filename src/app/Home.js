@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import {
   Routes,
   Route,
-  Link
 } from 'react-router-dom';
-import Nutrition from './Nutrition.js';
-import { useLoginMutation } from './services/fitnessApi';
 import { useDispatch, useSelector } from 'react-redux';
+import { Input, InputLabel, Button, Box } from '@mui/material';
+
+import Nutrition from './Nutrition.js';
+import BottomNavigation from './BottomNavigation';
+import Header from './Header';
+
+import { useLoginMutation } from './services/fitnessApi';
 import { logOut } from './reducers/user';
 
 export default function Home() {
@@ -29,40 +33,37 @@ export default function Home() {
   }
 
   return (
-    <div>
+    <Box>
+      <Header/>
+
       {user?.error && <div>{user.error}</div>}
       {!user?.token ? (
-        <form>
-          <label>
-            Email
-            <input onChange={({target}) => setEmail(target.value)}/>
-          </label>
-          <label>
-            Password
-            <input onChange={({target}) => setPassword(target.value)} />
-          </label>
-          <button onClick={(e) => login(e)}>Login</button>
-        </form>
+        <Box>
+          <form>
+            <InputLabel>
+              Email
+              <Input onChange={({target}) => setEmail(target.value)}/>
+            </InputLabel>
+            <InputLabel>
+              Password
+              <Input onChange={({target}) => setPassword(target.value)} />
+            </InputLabel>
+            <Button variant="contained" onClick={(e) => login(e)}>Login</Button>
+          </form>
+        </Box>
       ) : (
-        <div>
-            {user?.email}
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/nutrition">Nutrition</Link>
-              </li>
-            </ul>
-          </nav>
+        <Box>
+            Welcome!
           <Routes>
             <Route path="/nutrition" element={<Nutrition/>}/>
             <Route path="/" element={<div></div>}/>
           </Routes>
-          <button onClick={logout}>Logout</button>
-        </div>
+          <Button variant="contained" onClick={logout}>Logout</Button>
+          <footer>
+            <BottomNavigation />
+          </footer>
+        </Box>
       )}
-    </div>
+    </Box>
   );
 }
