@@ -3,56 +3,44 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import fetchMock from "jest-fetch-mock";
 
 import store from './store';
 import App from '../App';
 
-let container = null;
+const user = {
+  email: 'jones@example.com',
+  password: 'password'
+};
+const token = 'token';
 
-beforeEach(() => {
-  container = render(
-    <Provider store={store}>
-      <App />
-    </Provider>
-  );
+describe('Loggin in', () => {
+  let container = null;
+  mockServer({loginResponse: {...user, token}});
 
-  process.env.REACT_APP_API_BASE = 'http://example.com';
-  fetchMock.resetMocks();
+  beforeEach(() => {
+    container = render(<Provider store={store}><App/></Provider>);
+  });
 
-  fetchMock.mockIf(/^http?:\/\/example.com.*$/, req => {
-    if (req.url.endsWith('/login')) {
-      return {email: 'natasha@example.com', token: 'token', exp: 'tomorrow'};
-    } else {
-      return {
-        status: 404,
-        body: 'Not Found'
-      }
-    }
-  })
-});
+  it('logs the user in', async () => {
+    const { getByLabelText, getByText, findAllByText } = container
+    const emailInput = getByLabelText('Enter your Email');
+    const passwordInput = getByLabelText('Enter your Password');
 
-test('login', async () => {
-  const { getByLabelText, getByText, findAllByText } = container
-  const email = 'natasha@example.com';
-  const password = 'password';
-  const emailInput = getByLabelText('Enter your Email');
-  const passwordInput = getByLabelText('Enter your Password');
+    fireEvent.change(emailInput, {target: {value: user.email}});
+    fireEvent.change(passwordInput, {target: {value: user.password}});
 
-  fireEvent.change(emailInput, {target: {value: email}});
-  fireEvent.change(passwordInput, {target: {value: password}});
+    expect(emailInput.value).toBe(user.email);
+    expect(passwordInput.value).toBe(user.password);
 
-  expect(emailInput.value).toBe(email);
-  expect(passwordInput.value).toBe(password);
+    fireEvent(
+      getByText('Login'),
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    );
 
-  fireEvent(
-    getByText('Login'),
-    new MouseEvent('click', {
-      bubbles: true,
-      cancelable: true,
-    }),
-  );
-
-  const welcome = await findAllByText(/Welcome/i);
-  expect(welcome[0].textContent).toEqual("Welcome!");
+    const welcome = await findAllByText(/Welcome/i);
+    expect(welcome[0]).toHaveTextContent(user.email);
+  });
 });

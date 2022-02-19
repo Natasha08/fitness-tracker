@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import { persistReducer, PERSIST, REGISTER } from 'redux-persist';
+import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist-indexeddb-storage';
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
 
@@ -24,7 +24,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 const store = configureStore({
   reducer: persistedReducer,
   middleware: (gDM) => (
-    gDM({serializableCheck: {ignoredActions: [PERSIST, REGISTER]}})
+    gDM({serializableCheck: false})
     .concat(fitnessApiMiddleware)
   )
 });

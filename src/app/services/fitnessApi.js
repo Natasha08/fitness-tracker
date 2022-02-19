@@ -22,8 +22,8 @@ const fitnessApi = createApi({
         try {
           const {data} = await queryFulfilled;
           dispatch(loggedIn(data));
-        } catch {
-          dispatch(loginError());
+        } catch (error) {
+          dispatch(loginError(error));
         }
       },
     }),

@@ -71,7 +71,7 @@ export default function Home() {
       ) : (
         <>
           <div className="Main">
-              Welcome!
+              Welcome! {user.email}
             <Routes>
               <Route path="/nutrition" element={<Nutrition/>}/>
               <Route path="/" element={<div></div>}/>
