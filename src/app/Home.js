@@ -80,9 +80,7 @@ export default function Home() {
         </>
       )}
       <div className="Footer">
-        <footer>
-          <BottomNavigation />
-        </footer>
+        <BottomNavigation />
       </div>
     </Grid>
   );
