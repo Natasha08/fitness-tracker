@@ -3,7 +3,10 @@ import _ from 'lodash';
 import fetchMock from "jest-fetch-mock";
 import { render } from '@testing-library/react';
 import { unmountComponentAtNode } from "react-dom";
+import { MemoryRouter } from "react-router-dom";
+import { Provider } from 'react-redux';
 
+import { App } from './App';
 import * as mocks from './__mocks__';
 import * as globalHelpers from './__mocks__/helpers/global_helpers';
 import store from './app/store';
@@ -24,7 +27,15 @@ afterEach(() => {
   fetchMock.disableMocks();
 });
 
-global.mountApp = (app) => {
+const DEFAULT_APP = (
+  <Provider store={store}>
+    <MemoryRouter>
+      <App />
+    </MemoryRouter>
+  </Provider>
+);
+
+global.mountApp = (app=DEFAULT_APP) => {
   beforeEach(() => {
     global.TestApp = render(app);
   });

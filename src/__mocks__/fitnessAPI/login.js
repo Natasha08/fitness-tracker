@@ -1,11 +1,13 @@
 import '@testing-library/jest-dom/extend-expect';
 import { checkRequiredKeysFor, mockSuccess, mockFailure } from '../helpers/server';
 
-const login = ({config: {name="login", failure}={}, data}) => {
-  if (failure) return mockFailure(name, failure);
+const NAME = 'login';
 
-  checkRequiredKeysFor(name, data, () => {
-    mockSuccess(name, data);
+const login = ({config: {failure}={}, data}) => {
+  if (failure) return mockFailure(NAME, failure);
+
+  checkRequiredKeysFor(NAME, data, () => {
+    mockSuccess(NAME, data);
   });
 };
 
