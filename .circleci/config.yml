@@ -23,12 +23,9 @@ jobs:
           name: run tests
           command: |
             mkdir /tmp/test-results
-            TEST_FILES="$(circleci tests glob "src/test/**/*.test.js" | \
-              circleci tests split --split-by=timings)"
 
             npm test \
               --format progress \
-              $TEST_FILES
 
       # collect reports
       - store_test_results:
