@@ -39,7 +39,7 @@ function ResponsiveDrawer(props) {
   const drawer = (
     <div>
       <Toolbar>
-        {user?.token && <a href="#" onClick={(e) => logOut(e)}>Logout</a>}
+        {user?.token && <button onClick={(e) => logOut(e)}>Logout</button>}
       </Toolbar>
       <Divider />
       <List>
