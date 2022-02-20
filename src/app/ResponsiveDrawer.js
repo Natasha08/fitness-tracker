@@ -14,7 +14,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { logOut } from './reducers/user';
+import { APP_RESET } from './reducers/user';
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -26,9 +26,9 @@ function ResponsiveDrawer(props) {
   const dispatch = useDispatch();
   const user = useSelector(({user}) => user);
 
-  function logout(e) {
+  function logOut(e) {
     e.preventDefault();
-    dispatch(logOut());
+    dispatch(APP_RESET());
     setMobileOpen(false);
   }
 
@@ -39,7 +39,7 @@ function ResponsiveDrawer(props) {
   const drawer = (
     <div>
       <Toolbar>
-        {user?.token && <a href="#" onClick={(e) => logout(e)}>Logout</a>}
+        {user?.token && <a href="#" onClick={(e) => logOut(e)}>Logout</a>}
       </Toolbar>
       <Divider />
       <List>

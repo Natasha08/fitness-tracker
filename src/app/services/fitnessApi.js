@@ -10,6 +10,7 @@ const fitnessApi = createApi({
       return action.payload[reducerPath];
     }
   },
+  initialState: null,
   tagTypes: ['user-auth'],
   endpoints: (builder) => ({
     login: builder.mutation({
@@ -27,7 +28,12 @@ const fitnessApi = createApi({
         }
       },
     }),
-  })
+  }),
+  extraReducers: (builder) => {
+    builder.addCase('APP_RESET', () => {
+      return this.initialState;
+    });
+  },
 });
 
 export const {

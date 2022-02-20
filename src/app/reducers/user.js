@@ -12,11 +12,11 @@ const user = createSlice({
     loginError: (err) => {
       return {error: "Error logging in, please try again"};
     },
-    logOut: () => {
+    APP_RESET: () => {
       return initialState;
     }
   },
 });
 
-export const { loggedIn, logOut, loginError } = user.actions;
+export const { loggedIn, APP_RESET, loginError } = user.actions;
 export default user.reducer;

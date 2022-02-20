@@ -11,7 +11,9 @@ import Home from './app/Home.js';
 
 const persistor = persistStore(store);
 
-export default function App() {
+export const App = Home;
+
+export default function AppWithProvider() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
