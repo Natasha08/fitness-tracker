@@ -17,7 +17,7 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            npm install --jobs=4 --retry=3 --path vendor/bundle
+            npm install --jobs=4 --retry=3
 
       - run:
           name: run tests
