@@ -1,8 +1,8 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { MemoryRouter } from "react-router-dom";
 import { Provider } from 'react-redux';
-import { findByText } from '@testing-library/dom'
+import { findByText } from '@testing-library/dom';
 
 import { App } from '../App';
 
@@ -14,27 +14,37 @@ const token = 'token';
 
 describe('Login', () => {
   const loginResponse = {
-    name: 'login',
     data: {...user, token}
   };
+
   mockFitnessAPI({loginResponse});
-  const { container } = render(
+  const app = (
     <Provider store={store}>
       <MemoryRouter>
         <App />
       </MemoryRouter>
     </Provider>
   );
+  mountApp(app);
 
   it('logs the user in', async () => {
+    const {container} = TestApp;
+
     fillIn({labelText: 'Enter your Email', value: user.email, screen});
     fillIn({labelText: 'Enter your Password', value: user.password, screen});
 
     clickOn('Login', {screen});
 
-
     const homePageText = await findByText(container, /Welcome/i);
     expect(homePageText).toHaveTextContent(user.email);
+  });
+
+  describe('state between tests', () => {
+    it('state is reset between tests', () => {
+      const { container } = TestApp;
+      expect(container.textContent).toContain('Fitness');
+      expect(container.textContent).not.toContain(user.email);
+    });
   });
 
   describe('unauthorized user', () => {
@@ -42,18 +52,23 @@ describe('Login', () => {
       email: 'unknown@example.com',
       password: 'password'
     };
-    mockFitnessAPI({loginResponse: {
-      name: 'login',
-      failure: 'unauthorized'
-    }});
 
-
-    it('state is reset during tests', async () => {
-      expect(container.textContent).not.toContain(user.email);
+    mockFitnessAPI({
+      loginResponse: {
+        config: {name: 'login', failure: 'unauthorized'},
+        data: unknownUser
+      }
     });
 
-    it('displays an error message on login attempt', async() => {
+    it('displays an error message on login attempt', async () => {
+      const {container} = TestApp;
 
+      fillIn({labelText: 'Enter your Email', value: unknownUser.email, screen});
+      fillIn({labelText: 'Enter your Password', value: unknownUser.password, screen});
+
+      clickOn('Login', {screen});
+      const homePageText = await findByText(container, /Error/i);
+      expect(homePageText).toHaveTextContent('Error logging in, please try again');
     });
   });
 });
