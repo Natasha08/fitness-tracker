@@ -11,6 +11,7 @@ const token = 'token';
 describe('Loggin in', () => {
   let app = null;
   const loginResponse = {
+    name: 'login',
     data: {...user, token}
   };
   mockFitnessAPI({loginResponse});
