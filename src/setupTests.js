@@ -46,15 +46,12 @@ afterEach(() => {
   fetchMock.disableMocks();
 });
 
-global.mountApp = (state={}) => {
-  const store = withStore(state);
-
-  const DefaultApp = (
-    <Provider store={store}>
+global.mountApp = (state={}) => (
+  render(
+    <Provider store={withStore(state)}>
       <MemoryRouter>
         <App />
       </MemoryRouter>
     </Provider>
-  );
-  return render(DefaultApp);
-}
+  )
+);
