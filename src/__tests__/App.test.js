@@ -61,10 +61,16 @@ describe('Login', () => {
   });
 
   describe('user already logged in', () => {
+    const userData = {
+      email: 'sam@example.com',
+      password: 'password',
+      token: 'token'
+    };
+
     it('displays the welcome message', async() => {
-      mountApp({user: authenticatedUser});
+      mountApp({user: userData});
       const homePageText = await screen.findByText(/Welcome/i);
-      expect(homePageText).toHaveTextContent(user.email);
+      expect(homePageText).toHaveTextContent(userData.email);
     });
   });
 });
