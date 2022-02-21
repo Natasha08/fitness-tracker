@@ -6,10 +6,10 @@ import storage from 'redux-persist-indexeddb-storage';
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
 
 import userReducer from './reducers/user';
-import {fitnessApiPath, fitnessApiReducer, fitnessApiMiddleware} from './services/fitnessApi';
+import {FitnessAPIPath, FitnessAPIReducer, FitnessAPIMiddleware} from './services/FitnessAPI';
 
 const rootReducer = combineReducers({
-  [fitnessApiPath]: fitnessApiReducer,
+  [FitnessAPIPath]: FitnessAPIReducer,
   user: userReducer
 });
 
@@ -25,7 +25,7 @@ const store = configureStore({
   reducer: persistedReducer,
   middleware: (gDM) => (
     gDM({serializableCheck: false})
-    .concat(fitnessApiMiddleware)
+    .concat(FitnessAPIMiddleware)
   )
 });
 setupListeners(store.dispatch);

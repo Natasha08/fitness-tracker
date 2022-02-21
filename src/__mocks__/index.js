@@ -1,3 +1,3 @@
-import fitnessAPi from './fitnessAPI';
+import FitnessAPI from './FitnessAPI';
 
-export const mockFitnessAPI = fitnessAPi;
+export const mockFitnessAPI = FitnessAPI;

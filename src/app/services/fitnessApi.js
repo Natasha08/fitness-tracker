@@ -2,9 +2,11 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { REHYDRATE } from 'redux-persist';
 import { loggedIn, loginError } from '../reducers/user';
 
-const fitnessApi = createApi({
-  reducerPath: 'fitnessApi',
-  baseQuery: fetchBaseQuery({baseUrl: `${process.env.REACT_APP_API_BASE}/api/v1`}),
+export const API_VERSION = '/api/v1';
+
+const FitnessAPI = createApi({
+  reducerPath: 'FitnessAPI',
+  baseQuery: fetchBaseQuery({baseUrl: `${process.env.REACT_APP_API_BASE}${API_VERSION}`}),
   extractRehydrationInfo(action, {reducerPath}={}) {
     if (action.type === REHYDRATE && action.payload && action.payload[reducerPath]) {
       return action.payload[reducerPath];
@@ -37,10 +39,10 @@ const fitnessApi = createApi({
 });
 
 export const {
-  reducer:fitnessApiReducer,
-  middleware:fitnessApiMiddleware,
-  reducerPath:fitnessApiPath,
+  reducer:FitnessAPIReducer,
+  middleware:FitnessAPIMiddleware,
+  reducerPath:FitnessAPIPath,
   useLoginMutation,
-} = fitnessApi;
+} = FitnessAPI;
 
-export default fitnessApi;
+export default FitnessAPI;

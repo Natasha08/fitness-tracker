@@ -12,7 +12,7 @@ import Nutrition from './Nutrition.js';
 import BottomNavigation from './BottomNavigation';
 import Header from './Header';
 import ResponsiveDrawer from './ResponsiveDrawer';
-import { useLoginMutation } from './services/fitnessApi';
+import { useLoginMutation } from './services/FitnessAPI';
 
 export default function Home() {
   const [email, setEmail] = useState('');
