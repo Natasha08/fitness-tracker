@@ -9,6 +9,14 @@ const FAILURE_RESPONSES = {
 };
 const upperSnakeCase = (name) => _.split(_.upperCase(name), ' ').join('_');
 
+const urlMatchesEndpoint = (url, name, params) => {
+  const endpointName = upperSnakeCase(name);
+  const startsWithEndpoint = url.startsWith(keys[`${endpointName}_ENDPOINT`]);
+  const endsWithEndpointOrParams = url.endsWith(keys[`${endpointName}_URL`]) || url.endsWith(params);
+
+  return startsWithEndpoint && endsWithEndpointOrParams;
+};
+
 export const checkRequiredKeysFor = (name, response, callback) => {
   const requiredKeys = keys[`${_.upperCase(name)}_REQUIRED_KEYS`];
    const missingKeys = _.difference(requiredKeys, _.keys(response));
@@ -18,11 +26,9 @@ export const checkRequiredKeysFor = (name, response, callback) => {
   throw new Error(`Missing the following keys for ${name}: ${missingKeys}`);
 };
 
-export const mockFailure = (name, failure) => {
+export const mockFailure = (name, failure, params) => {
   fetchMock.mockReject(({url}) => {
-    const endpointName = upperSnakeCase(name);
-
-    if (url.startsWith(keys[`${endpointName}_ENDPOINT`]) && url.endsWith(keys[`${endpointName}_URL`])) {
+    if (urlMatchesEndpoint(url, name, params)) {
       return Promise.reject(JSON.stringify(FAILURE_RESPONSES[failure]));
     }
   });
@@ -30,9 +36,7 @@ export const mockFailure = (name, failure) => {
 
 export const mockSuccess = (name, data, params) => {
   fetchMock.mockResponse(({url}) => {
-    const endpointName = upperSnakeCase(name);
-
-    if (url.startsWith(keys[`${endpointName}_ENDPOINT`]) && (url.endsWith(keys[`${endpointName}_URL`]) || url.endsWith(params))) {
+    if (urlMatchesEndpoint(url, name, params)) {
       return Promise.resolve(JSON.stringify(data));
     }
   });
