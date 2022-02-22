@@ -69,7 +69,7 @@ function ResponsiveDrawer(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{display: "flex"}}>
+    <Box sx={{display: 'flex'}}>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -84,7 +84,7 @@ function ResponsiveDrawer(props) {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{mr: 2, display: {sm: "none"}}}
+            sx={{mr: 2, display: {sm: 'none'}}}
           >
             <MenuIcon />
           </IconButton>
@@ -108,8 +108,8 @@ function ResponsiveDrawer(props) {
             keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
-            display: {xs: "block", sm: "none"},
-            "& .MuiDrawer-paper": {boxSizing: "border-box", width: drawerWidth},
+            display: {xs: 'block', sm: 'none'},
+            '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
           }}
         >
           {drawer}
@@ -117,8 +117,8 @@ function ResponsiveDrawer(props) {
         <Drawer
           variant="permanent"
           sx={{
-            display: {xs: "none", sm: "block"},
-            "& .MuiDrawer-paper": {boxSizing: "border-box", width: drawerWidth},
+            display: {xs: 'none', sm: 'block'},
+            '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
           }}
           open
         >

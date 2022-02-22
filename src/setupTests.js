@@ -1,10 +1,9 @@
 import '@testing-library/jest-dom/extend-expect';
 import _ from 'lodash';
-import fetchMock from "jest-fetch-mock";
+import fetchMock from 'jest-fetch-mock';
 import { render } from '@testing-library/react';
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 

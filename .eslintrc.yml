@@ -1,0 +1,23 @@
+---
+  extends:
+    react-app
+  globals:
+    mockFitnessAPI: readonly
+    mountApp: readonly
+    fillIn: readonly
+    clickOn: readonly
+    withStore: readonly
+    API_VERSION: readonly
+    _ : readonly
+  parser: "@babel/eslint-parser"
+  parserOptions:
+    requireConfigFile: false
+    ecmaFeatures:
+      jsx: true
+    ecmaVersion: latest
+    sourceType: module
+  ignorePatterns:
+    node_modules
+  rules:
+    quotes: [2, single]
+    jsx-quotes: [2, prefer-double]
