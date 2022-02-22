@@ -18,7 +18,7 @@ const urlMatchesEndpoint = (url, name, params) => {
 };
 
 export const checkRequiredKeysFor = (name, response, callback) => {
-  const requiredKeys = keys[`${_.upperCase(name)}_REQUIRED_KEYS`];
+  const requiredKeys = keys[`${upperSnakeCase(name)}_REQUIRED_KEYS`];
    const missingKeys = _.difference(requiredKeys, _.keys(response));
   const requiredKeysPresent = _.isEmpty(missingKeys);
 
