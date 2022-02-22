@@ -28,7 +28,13 @@
       - prefer-double
     comma-spacing:
       - 2
-      - {before: false, after: true}
+      -
+        before: false
+        after: true
     space-in-parens:
       - 2
       - never
+    no-restricted-imports:
+      - 2
+      - paths:
+          - "@mui/material"
