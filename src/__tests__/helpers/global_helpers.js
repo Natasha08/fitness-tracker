@@ -2,9 +2,8 @@ import { fireEvent } from '@testing-library/react';
 
 export const fillIn = (screen, labelText) => ({
   with: (value) => {
-    const emailInput = screen.getByLabelText(labelText);
-    fireEvent.change(emailInput, {target: {value}});
-    expect(emailInput.value).toBe(value);
+    const input = screen.getByLabelText(labelText);
+    fireEvent.change(input, {target: {value}});
   }
 });
 

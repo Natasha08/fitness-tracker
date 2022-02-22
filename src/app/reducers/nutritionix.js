@@ -7,10 +7,16 @@ const nutritionix = createSlice({
   initialState,
   reducers: {
     nutritionixSearchResults: (state, action) => {
-      return action.payload;
+      const newState = _.omit(state, 'instantSearch');
+      const {common, branded} = action.payload;
+
+      return {
+        ...newState,
+        instantSearch: [...common, ...branded]
+      };
     },
     searchError: (err) => {
-      return {error: 'Error logging in, please try again'};
+      return {error: 'Error searching, please try again'};
     },
     APP_RESET: () => {
       return initialState;
@@ -18,5 +24,5 @@ const nutritionix = createSlice({
   },
 });
 
-export const { nutritionixSearchResults, searchError } = nutritionix.actions;
+export const {nutritionixSearchResults, searchError} = nutritionix.actions;
 export default nutritionix.reducer;
