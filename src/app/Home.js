@@ -39,11 +39,13 @@ export default function Home() {
         <div className="Main">
           <form className="login-form">
             <TextField
+              value={email}
               label="Enter your Email"
               placeholder="Email"
               onChange={onChange(setEmail)}
             />
             <TextField
+              value={password}
               type={showPassword ? 'text' : 'password'}
               label="Enter your Password"
               placeholder="Password"

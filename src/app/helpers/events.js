@@ -1,5 +1,9 @@
+import _ from 'lodash';
+
 export const onChange = (callback) => (event) => {
-  callback(_.trim(event.target.value));
+  const input = _.trim(event.target.value);
+  const value = _.isEmpty(input) ? '' : input;
+  callback(value);
 };
 
 export const preventDefault = (callback, ...args) => (e) => {
