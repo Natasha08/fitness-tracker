@@ -21,20 +21,20 @@
     node_modules
   rules:
     quotes:
-      - 2
+      - 1
       - single
     jsx-quotes:
-      - 2
+      - 1
       - prefer-double
     comma-spacing:
-      - 2
+      - 1
       -
         before: false
         after: true
     space-in-parens:
-      - 2
+      - 1
       - never
     no-restricted-imports:
-      - 2
+      - 1
       - paths:
           - "@mui/material"
