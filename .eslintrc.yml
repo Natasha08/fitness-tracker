@@ -26,3 +26,9 @@
     jsx-quotes:
       - 2
       - prefer-double
+    comma-spacing:
+      - 2
+      - {before: false, after: true}
+    space-in-parens:
+      - 2
+      - never
