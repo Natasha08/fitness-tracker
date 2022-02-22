@@ -12,8 +12,8 @@ import * as mocks from './__mocks__';
 import * as globalHelpers from './__tests__/helpers/global_helpers';
 
 import { rootReducer } from './app/store';
-import { FitnessAPIMiddleware } from './app/services/FitnessAPI';
-import { NutritionixAPIMiddleware } from './app/services/NutritionixAPI';
+import FitnessAPI from './app/services/FitnessAPI';
+import NutritionixAPI from './app/services/NutritionixAPI';
 
 global.withStore = (preloadedState={}) => {
   const store = configureStore({
@@ -21,8 +21,8 @@ global.withStore = (preloadedState={}) => {
     preloadedState,
     middleware: (gDM) => (
       gDM({serializableCheck: false})
-        .concat(FitnessAPIMiddleware)
-        .concat(NutritionixAPIMiddleware)
+        .concat(FitnessAPI.middleware)
+        .concat(NutritionixAPI.middleware)
     )
   });
   setupListeners(store.dispatch);

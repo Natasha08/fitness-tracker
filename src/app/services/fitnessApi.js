@@ -38,11 +38,6 @@ const FitnessAPI = createApi({
   },
 });
 
-export const {
-  reducer:FitnessAPIReducer,
-  middleware:FitnessAPIMiddleware,
-  reducerPath:FitnessAPIPath,
-  useLoginMutation,
-} = FitnessAPI;
+export const { useLoginMutation } = FitnessAPI;
 
 export default FitnessAPI;

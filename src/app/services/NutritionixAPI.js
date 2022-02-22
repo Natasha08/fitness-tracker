@@ -47,11 +47,6 @@ const NutritionixAPI = createApi({
   },
 });
 
-export const {
-  reducer: NutritionixAPIReducer,
-  middleware: NutritionixAPIMiddleware,
-  reducerPath: NutritionixAPIPath,
-  useInstantSearchMutation,
-} = NutritionixAPI;
+export const { useInstantSearchMutation } = NutritionixAPI;
 
 export default NutritionixAPI;

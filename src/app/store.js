@@ -6,12 +6,12 @@ import storage from 'redux-persist-indexeddb-storage';
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
 
 import userReducer from './reducers/user';
-import {FitnessAPIPath, FitnessAPIReducer, FitnessAPIMiddleware} from './services/FitnessAPI';
-import {NutritionixAPIPath, NutritionixAPIReducer, NutritionixAPIMiddleware} from './services/NutritionixAPI';
+import FitnessAPI from './services/FitnessAPI';
+import NutritionixAPI from './services/NutritionixAPI';
 
 export const rootReducer = combineReducers({
-  [FitnessAPIPath]: FitnessAPIReducer,
-  [NutritionixAPIPath]: NutritionixAPIReducer,
+  [FitnessAPI.reducerPath]: FitnessAPI.reducer,
+  [NutritionixAPI.reducerPath]: NutritionixAPI.reducer,
   user: userReducer
 });
 
@@ -27,8 +27,8 @@ const store = configureStore({
   reducer: persistedReducer,
   middleware: (gDM) => (
     gDM({serializableCheck: false})
-    .concat(FitnessAPIMiddleware)
-    .concat(NutritionixAPIMiddleware)
+    .concat(FitnessAPI.middleware)
+    .concat(NutritionixAPI.middleware)
   )
 });
 setupListeners(store.dispatch);
