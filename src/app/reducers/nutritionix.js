@@ -10,7 +10,7 @@ const nutritionix = createSlice({
       return action.payload;
     },
     searchError: (err) => {
-      return { error: "Error logging in, please try again" };
+      return {error: 'Error logging in, please try again'};
     },
     APP_RESET: () => {
       return initialState;

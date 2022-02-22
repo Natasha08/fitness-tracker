@@ -1,7 +1,7 @@
 import React from 'react';
-import { act, renderHook } from "@testing-library/react-hooks";
+import { act, renderHook } from '@testing-library/react-hooks';
 import { Provider } from 'react-redux';
-import fetchMock from "jest-fetch-mock";
+import fetchMock from 'jest-fetch-mock';
 
 import NutritionixAPIService, { useInstantSearchMutation, API_VERSION } from '../../app/services/NutritionixAPI';
 
@@ -52,7 +52,7 @@ describe('NutritionixAPI', () => {
         common_type: null,
         tag_id: '399',
         photo: {
-          thumb: "https://nix-tag-images.s3.amazonaws.com/399_thumb.jpg",
+          thumb: 'https://nix-tag-images.s3.amazonaws.com/399_thumb.jpg',
         },
         locale: 'en_US'
       });

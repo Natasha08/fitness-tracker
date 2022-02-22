@@ -1,5 +1,5 @@
-import fetchMock from "jest-fetch-mock";
-import * as keys from "./required_keys";
+import fetchMock from 'jest-fetch-mock';
+import * as keys from './required_keys';
 
 const FAILURE_RESPONSES = {
   unauthorized: {
