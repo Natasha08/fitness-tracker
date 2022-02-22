@@ -9,6 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
+import { onChange, preventDefault } from './helpers/events';
 import Nutrition from './Nutrition.js';
 import BottomNavigation from './BottomNavigation';
 import Header from './Header';
@@ -22,13 +23,6 @@ export default function Home() {
 
   const [loginUser] = useLoginMutation({fixedCacheKey: 'user-auth'});
   const user = useSelector(({user}) => user);
-
-
-  function login(e) {
-    e.preventDefault();
-
-    loginUser({email, password});
-  }
 
   return (
     <Grid className="App"
@@ -47,13 +41,13 @@ export default function Home() {
             <TextField
               label="Enter your Email"
               placeholder="Email"
-              onChange={({target}) => setEmail(target.value)}
+              onChange={onChange(setEmail)}
             />
             <TextField
               type={showPassword ? 'text' : 'password'}
               label="Enter your Password"
               placeholder="Password"
-              onChange={({target}) => setPassword(target.value)}
+              onChange={onChange(setPassword)}
               InputProps={{endAdornment: (
                 <InputAdornment position="end">
                   <IconButton
@@ -66,7 +60,7 @@ export default function Home() {
                 </InputAdornment>
               )}}
             />
-            <Button variant="contained" onClick={(e) => login(e)}>Login</Button>
+            <Button variant="contained" onClick={preventDefault(loginUser, {email, password})}>Login</Button>
           </form>
         </div>
       ) : (

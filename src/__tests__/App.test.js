@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/react';
+import { fillIn } from './helpers/global_helpers';
 
 const user = {
   email: 'jones@example.com',
@@ -17,10 +18,10 @@ describe('Login', () => {
   it('logs the user in', async () => {
     mountApp();
 
-    fillIn({labelText: 'Enter your Email', value: user.email, screen});
-    fillIn({labelText: 'Enter your Password', value: user.password, screen});
+    fillIn(screen, 'Enter your Email').with(user.email);
+    fillIn(screen, 'Enter your Password').with(user.password);
 
-    clickOn('Login', {screen});
+    clickOn(screen, 'Login');
 
     const homePageText = await screen.findByText(/Welcome/i);
     expect(homePageText).toHaveTextContent(user.email);
@@ -51,10 +52,11 @@ describe('Login', () => {
 
     it('displays an error message on login attempt', async () => {
       mountApp();
-      fillIn({labelText: 'Enter your Email', value: unknownUser.email, screen});
-      fillIn({labelText: 'Enter your Password', value: unknownUser.password, screen});
 
-      clickOn('Login', {screen});
+      fillIn(screen, 'Enter your Email').with(unknownUser.email);
+      fillIn(screen, 'Enter your Password').with(unknownUser.password);
+
+      clickOn(screen, 'Login');
       const homePageText = await screen.findByText(/Error/i);
       expect(homePageText).toHaveTextContent('Error logging in, please try again');
     });

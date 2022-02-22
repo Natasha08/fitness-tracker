@@ -9,7 +9,7 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 
 import { App } from './App';
 import * as mocks from './__mocks__';
-import * as globalHelpers from './__mocks__/helpers/global_helpers';
+import * as globalHelpers from './__tests__/helpers/global_helpers';
 
 import { rootReducer } from './app/store';
 import { FitnessAPIMiddleware } from './app/services/FitnessAPI';
