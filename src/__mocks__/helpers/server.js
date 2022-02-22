@@ -7,6 +7,7 @@ const FAILURE_RESPONSES = {
     body: {error: 'Unauthorized'}
   }
 };
+const upperSnakeCase = (name) => _.split(_.upperCase(name), ' ').join('_');
 
 export const checkRequiredKeysFor = (name, response, callback) => {
   const requiredKeys = keys[`${_.upperCase(name)}_REQUIRED_KEYS`];
@@ -19,15 +20,19 @@ export const checkRequiredKeysFor = (name, response, callback) => {
 
 export const mockFailure = (name, failure) => {
   fetchMock.mockReject(({url}) => {
-    if (url.startsWith(keys[`${_.upperCase(name)}_ENDPOINT`]) && url.endsWith(keys[`${_.upperCase(name)}_URL`])) {
+    const endpointName = upperSnakeCase(name);
+
+    if (url.startsWith(keys[`${endpointName}_ENDPOINT`]) && url.endsWith(keys[`${endpointName}_URL`])) {
       return Promise.reject(JSON.stringify(FAILURE_RESPONSES[failure]));
     }
   });
 };
 
-export const mockSuccess = (name, data) => {
+export const mockSuccess = (name, data, params) => {
   fetchMock.mockResponse(({url}) => {
-    if (url.startsWith(keys[`${_.upperCase(name)}_ENDPOINT`]) && url.endsWith(keys[`${_.upperCase(name)}_URL`])) {
+    const endpointName = upperSnakeCase(name);
+
+    if (url.startsWith(keys[`${endpointName}_ENDPOINT`]) && (url.endsWith(keys[`${endpointName}_URL`]) || url.endsWith(params))) {
       return Promise.resolve(JSON.stringify(data));
     }
   });

@@ -4,6 +4,7 @@
     - eslint:recommended
   globals:
     mockFitnessAPI: readonly
+    mockNutritionixAPI: readonly
     mountApp: readonly
     fillIn: readonly
     clickOn: readonly

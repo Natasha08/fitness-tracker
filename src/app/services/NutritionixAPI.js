@@ -32,7 +32,7 @@ const NutritionixAPI = createApi({
       }),
       async onQueryStarted(id, { dispatch, queryFulfilled }) {
         try {
-          const { data } = await queryFulfilled;
+          const {data} = await queryFulfilled;
           dispatch(nutritionixSearchResults(data));
         } catch (error) {
           dispatch(searchError(error));
