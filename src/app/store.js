@@ -5,9 +5,9 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist-indexeddb-storage';
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
 
-import userReducer from './reducers/user';
-import FitnessAPI from './services/FitnessAPI';
-import NutritionixAPI from './services/NutritionixAPI';
+import userReducer from 'app/reducers/user';
+import FitnessAPI from 'app/services/FitnessAPI';
+import NutritionixAPI from 'app/services/NutritionixAPI';
 
 export const rootReducer = combineReducers({
   [FitnessAPI.reducerPath]: FitnessAPI.reducer,

@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom/extend-expect';
-import { checkRequiredKeysFor, mockSuccess, mockFailure } from '../helpers/server';
+import { checkRequiredKeysFor, mockSuccess, mockFailure } from '__mocks__/helpers/server';
 
 const NAME = 'login';
 

@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { REHYDRATE } from 'redux-persist';
-import { nutritionixSearchResults, searchError } from '../reducers/nutritionix';
+import { nutritionixSearchResults, searchError } from 'app/reducers/nutritionix';
 
 export const API_VERSION = '/v2' ;
 

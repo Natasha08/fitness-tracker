@@ -7,13 +7,13 @@ import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
-import { App } from './App';
-import * as mocks from './__mocks__';
-import * as globalHelpers from './__tests__/helpers/global_helpers';
+import { App } from 'App';
+import * as mocks from '__mocks__';
+import * as globalHelpers from '__tests__/helpers/global_helpers';
 
-import { rootReducer } from './app/store';
-import FitnessAPI from './app/services/FitnessAPI';
-import NutritionixAPI from './app/services/NutritionixAPI';
+import { rootReducer } from 'app/store';
+import FitnessAPI from 'app/services/FitnessAPI';
+import NutritionixAPI from 'app/services/NutritionixAPI';
 
 global.withStore = (preloadedState={}) => {
   const store = configureStore({

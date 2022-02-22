@@ -3,7 +3,7 @@ import { act, renderHook } from '@testing-library/react-hooks';
 import { Provider } from 'react-redux';
 import fetchMock from 'jest-fetch-mock';
 
-import NutritionixAPIService, { useInstantSearchMutation } from '../../app/services/NutritionixAPI';
+import NutritionixAPIService, { useInstantSearchMutation } from 'app/services/NutritionixAPI';
 
 const search = 'banana';
 

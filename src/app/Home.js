@@ -9,12 +9,12 @@ import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-import { onChange, preventDefault } from './helpers/events';
-import Nutrition from './Nutrition.js';
-import BottomNavigation from './BottomNavigation';
-import Header from './Header';
-import ResponsiveDrawer from './ResponsiveDrawer';
-import { useLoginMutation } from './services/FitnessAPI';
+import { onChange, preventDefault } from 'app/helpers/events';
+import Nutrition from 'app/Nutrition.js';
+import BottomNavigation from 'app/BottomNavigation';
+import Header from 'app/Header';
+import ResponsiveDrawer from 'app/ResponsiveDrawer';
+import { useLoginMutation } from 'app/services/FitnessAPI';
 
 export default function Home() {
   const [email, setEmail] = useState('');

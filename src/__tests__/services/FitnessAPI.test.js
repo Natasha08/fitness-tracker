@@ -3,7 +3,7 @@ import { act, renderHook } from '@testing-library/react-hooks';
 import { Provider } from 'react-redux';
 import fetchMock from 'jest-fetch-mock';
 
-import FitnessAPIService, { useLoginMutation, API_VERSION } from '../../app/services/FitnessAPI';
+import FitnessAPIService, { useLoginMutation, API_VERSION } from 'app/services/FitnessAPI';
 
 const user = {
   email: 'jones@example.com',
