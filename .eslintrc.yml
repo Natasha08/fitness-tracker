@@ -1,6 +1,7 @@
 ---
   extends:
-    react-app
+    - react-app
+    - eslint:recommended
   globals:
     mockFitnessAPI: readonly
     mountApp: readonly
@@ -19,5 +20,9 @@
   ignorePatterns:
     node_modules
   rules:
-    quotes: [2, single]
-    jsx-quotes: [2, prefer-double]
+    quotes:
+      - 2
+      - single
+    jsx-quotes:
+      - 2
+      - prefer-double

@@ -21,7 +21,7 @@ export const mockFailure = (name, failure) => {
   fetchMock.mockReject(({url}) => {
     if (url.startsWith(keys[`${_.upperCase(name)}_ENDPOINT`]) && url.endsWith(keys[`${_.upperCase(name)}_URL`])) {
       return Promise.reject(JSON.stringify(FAILURE_RESPONSES[failure]));
-    };
+    }
   });
 };
 
@@ -29,6 +29,6 @@ export const mockSuccess = (name, data) => {
   fetchMock.mockResponse(({url}) => {
     if (url.startsWith(keys[`${_.upperCase(name)}_ENDPOINT`]) && url.endsWith(keys[`${_.upperCase(name)}_URL`])) {
       return Promise.resolve(JSON.stringify(data));
-    };
+    }
   });
 };
