@@ -20,6 +20,11 @@ jobs:
             npm install
 
       - run:
+          name: run linter
+          command: |
+            npm run lint
+
+      - run:
           name: run tests
           command: |
             mkdir /tmp/test-results
