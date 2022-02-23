@@ -10,9 +10,6 @@ import store from 'app/store';
 import Home from 'app/components/Home.js';
 
 const persistor = persistStore(store);
-
-export const App = Home;
-
 const Router = process.env.NODE_ENV === 'test' ? MemoryRouter : BrowserRouter;
 
 export default function AppWithProvider({initialEntries=['/'], providedStore=store}={}) {
