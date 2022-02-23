@@ -1,52 +1,47 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { REHYDRATE } from 'redux-persist';
 import { nutritionixSearchResults, searchError } from 'app/reducers/nutritionix';
+import { createApiService } from 'app/helpers/services';
 
 export const API_VERSION = '/v2' ;
 
-const NutritionixAPI = createApi({
-  reducerPath: 'NutritionixAPI',
-  baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.REACT_APP_NUTRITIONIX_API_BASE}${API_VERSION}`,
-    prepareHeaders: (headers) => {
-      headers.set('x-app-id', process.env.REACT_APP_NUTRITIONIX_APP_ID);
-      headers.set('x-app-key', process.env.REACT_APP_NUTRITIONIX_API_KEY);
-      headers.set('x-remote-user-id', 0);
+const reducerPath = 'NutritionixAPI';
+const baseUrl = process.env.REACT_APP_NUTRITIONIX_API_BASE + API_VERSION;
+const tagTypes = ['nutritionix-api'];
 
-      return headers
-    },
-  }),
-  extractRehydrationInfo(action, { reducerPath } = {}) {
-    if (action.type === REHYDRATE && action.payload && action.payload[reducerPath]) {
-      return action.payload[reducerPath];
-    }
-  },
-  initialState: null,
-  tagTypes: ['user-auth'],
-  endpoints: (builder) => ({
-    instantSearch: builder.mutation({
-      query: (search) => ({
-        url: 'search/instant',
-        method: 'GET',
-        params: `query=${search}`
-      }),
-      async onQueryStarted(id, { dispatch, queryFulfilled }) {
-        try {
-          const {data} = await queryFulfilled;
-          dispatch(nutritionixSearchResults(data));
-        } catch (error) {
-          dispatch(searchError(error));
-        }
-      },
+const endpoints = {
+  instantSearch: {
+    url: 'search/instant',
+    method: 'GET',
+    query: ({url, method}) => (search) => ({
+      url,
+      method,
+      params: `query=${search}`
     }),
-  }),
-  extraReducers: (builder) => {
-    builder.addCase('APP_RESET', () => {
-      return this.initialState;
-    });
+    onSuccess: nutritionixSearchResults,
+    onFailure: searchError,
   },
+};
+
+const headers = (headers) => {
+  headers.set('x-app-id', process.env.REACT_APP_NUTRITIONIX_APP_ID);
+  headers.set('x-app-key', process.env.REACT_APP_NUTRITIONIX_API_KEY);
+  headers.set('x-remote-user-id', 0);
+
+  return headers;
+};
+const baseOptions = {baseUrl, prepareHeaders: headers};
+
+const NutritionixAPI = createApiService({
+  reducerPath,
+  baseOptions,
+  tagTypes,
+  endpoints
 });
 
-export const { useInstantSearchMutation } = NutritionixAPI;
+/*
+  Mutation Naming (generated):
+  - format: `use${endpointName}Mutation`
+  - camelcase
+*/
 
+export const {useInstantSearchMutation} = NutritionixAPI;
 export default NutritionixAPI;

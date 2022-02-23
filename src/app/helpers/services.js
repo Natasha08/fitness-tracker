@@ -46,7 +46,7 @@ const buildEndpoint = (builder, endpoint) => {
 
 export const createApiService = ({
   reducerPath,
-  initialState = null,
+  initialState=null,
   baseOptions,
   tagTypes=[],
   endpoints
