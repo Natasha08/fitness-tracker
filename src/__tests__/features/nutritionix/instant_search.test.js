@@ -30,7 +30,7 @@ describe('Instant search', () => {
 
     await screen.findAllByText(searchText);
 
-    expectedResults.map(({food_name}) => {
+    expectedResults.forEach(({food_name}) => {
       expect(container).toHaveTextContent(food_name);
     });
   });
