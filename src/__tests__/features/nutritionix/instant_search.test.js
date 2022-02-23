@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react';
-import { appleSearchResults } from '__tests__/fixtures/instant_search';
+import { appleSearchResults, expectedResults } from '__tests__/fixtures/instant_search';
 
 const user = {
   email: 'jones@example.com',
@@ -7,7 +7,6 @@ const user = {
 };
 const token = 'token';
 const authenticatedUser = {...user, token};
-const expectedResults = _.flatten([...appleSearchResults.common, ...appleSearchResults.branded]);
 const searchText = 'apple';
 
 describe('Instant search', () => {

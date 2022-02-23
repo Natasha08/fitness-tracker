@@ -112,3 +112,5 @@ export const appleSearchResults = {
     }
   ]
 };
+
+export const expectedResults = _.flatten([...appleSearchResults.common, ...appleSearchResults.branded]);
