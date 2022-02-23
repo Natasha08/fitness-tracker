@@ -1,15 +1,16 @@
 import { nutritionixSearchResults, searchError } from 'app/reducers/nutritionix';
 import { createApiService } from 'app/helpers/services';
+import { INSTANT_SEARCH_ENDPOINT, INSTANT_SEARCH_URL } from '__mocks__/helpers/required_keys';
 
 export const API_VERSION = '/v2' ;
 
 const reducerPath = 'NutritionixAPI';
-const baseUrl = process.env.REACT_APP_NUTRITIONIX_API_BASE + API_VERSION;
+const baseUrl = INSTANT_SEARCH_ENDPOINT + API_VERSION;
 const tagTypes = ['nutritionix-api'];
 
 const endpoints = {
   instantSearch: {
-    url: 'search/instant',
+    url: INSTANT_SEARCH_URL,
     method: 'GET',
     query: ({url, method}) => (search) => ({
       url,
