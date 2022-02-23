@@ -1,5 +1,5 @@
-import FitnessAPI from '__mocks__/FitnessAPI';
-import NutritionixAPI from '__mocks__/NutritionixAPI';
+import FitnessAPI from './FitnessAPI';
+import NutritionixAPI from './NutritionixAPI';
 
 export const mockFitnessAPI = FitnessAPI;
 export const mockNutritionixAPI = NutritionixAPI;
