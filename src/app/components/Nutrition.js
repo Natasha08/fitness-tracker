@@ -4,11 +4,12 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
 
 import { onChange } from 'app/helpers/events';
-import { useInstantSearchMutation } from '../services/NutritionixAPI';
+import { useInstantSearchMutation } from 'app/services/NutritionixAPI';
 import { useSelector } from 'react-redux';
 
 export default function Nutrition() {
   const [search, setSeach] = useState('');
+  const [foodItem, setFoodItem] = useState({});
   const [instantSearch] = useInstantSearchMutation({fixedCacheKey: 'nutritionix-instant-search'});
 
   const nutritionix = useSelector(({nutritionix}) => nutritionix);
@@ -26,11 +27,15 @@ export default function Nutrition() {
       <h2>Nutrition Page</h2>
 
       <Autocomplete
-        onChange={onChange(searchNow)}
         disablePortal
         options={searchResults}
-        getOptionLabel={(option) => option.food_name}
+        getOptionLabel={(option) => option?.food_name ?? ''}
+        isOptionEqualToValue={(option, value) => option.tag_id === value.tag_id}
         sx={{width: 400}}
+        value={foodItem}
+        onChange={(event, newValue) => {
+          setFoodItem(newValue);
+        }}
         renderInput={(params) => (
           <TextField
             {...params}

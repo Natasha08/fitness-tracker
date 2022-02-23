@@ -1,5 +1,4 @@
 import { screen } from '@testing-library/react';
-import { fillIn } from '__tests__/helpers/global_helpers';
 import { appleSearchResults } from '__tests__/fixtures/instant_search';
 
 const user = {
@@ -34,8 +33,6 @@ describe('Instant search', () => {
 
     expectedResults.map(({food_name}) => {
       expect(container).toHaveTextContent(food_name);
-    })
-
-    expect(container).toHaveTextContent(searchText);
+    });
   });
 });

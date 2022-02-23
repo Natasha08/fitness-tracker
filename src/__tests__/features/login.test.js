@@ -1,5 +1,4 @@
 import { screen } from '@testing-library/react';
-import { fillIn } from '__tests__/helpers/global_helpers';
 
 const user = {
   email: 'jones@example.com',
