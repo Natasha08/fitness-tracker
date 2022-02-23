@@ -6,7 +6,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:16.14.0
+      - image: cimg/node:16.14.0
         environment:
           NODE_ENV: test
     working_directory: ~/repo
