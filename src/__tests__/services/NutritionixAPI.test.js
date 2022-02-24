@@ -3,9 +3,22 @@ import { act, renderHook } from '@testing-library/react-hooks';
 import { Provider } from 'react-redux';
 import fetchMock from 'jest-fetch-mock';
 
-import NutritionixAPIService, { useInstantSearchMutation } from 'app/services/NutritionixAPI';
+import NutritionixAPIService, { useInstantSearchMutation, useNaturalSearchMutation } from 'app/services/NutritionixAPI';
+import { bananaResult } from '__tests__/fixtures/nutritionix/natural_search';
 
 const search = 'banana';
+const commonFoodItem = {
+  food_name: 'banana',
+  serving_unit: 'medium (7" to 7-7/8" long)',
+  tag_name: 'banana',
+  serving_qty: 1,
+  common_type: null,
+  tag_id: '399',
+  photo: {
+    thumb: 'https://nix-tag-images.s3.amazonaws.com/399_thumb.jpg',
+  },
+  locale: 'en_US'
+};
 
 describe('NutritionixAPI', () => {
   beforeEach(() => {
@@ -44,18 +57,31 @@ describe('NutritionixAPI', () => {
       expect(_.keys(responseData)).toEqual(['common', 'branded']);
       const bananaFoodItem = _.first(responseData.common);
 
-      expect(bananaFoodItem).toEqual({
-        food_name: 'banana',
-        serving_unit: 'medium (7" to 7-7/8" long)',
-        tag_name: 'banana',
-        serving_qty: 1,
-        common_type: null,
-        tag_id: '399',
-        photo: {
-          thumb: 'https://nix-tag-images.s3.amazonaws.com/399_thumb.jpg',
-        },
-        locale: 'en_US'
-      });
+      expect(bananaFoodItem).toEqual(commonFoodItem);
+    });
+  });
+
+  describe('lookup item mutation', () => {
+    it('responds with the correct data', async () => {
+      const wrapper = ({ children }) => {
+        return <Provider store={withStore()}>{children}</Provider>;
+      };
+
+      const {result, waitForNextUpdate} = renderHook(() => useNaturalSearchMutation(), {wrapper});
+      const [naturalSearch] = result.current;
+
+      act(() => void naturalSearch(commonFoodItem.food_name));
+
+      await waitForNextUpdate({timeout: 2000});
+
+      const responseData = _.get(result, 'current[1].data');
+      expect(responseData).not.toBeUndefined();
+      const bananaFoodItem = _.first(responseData.foods);
+      expect(bananaFoodItem).toEqual(expect.objectContaining(bananaResult));
+    });
+  });
+  describe('natural language mutation', () => {
+    it('responds with the correct data', async () => {
     });
   });
 });

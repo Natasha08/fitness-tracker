@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react';
-import { appleSearchResults, expectedResults } from '__tests__/fixtures/instant_search';
+import { appleSearchResults, expectedResults } from '__tests__/fixtures/nutritionix/instant_search';
 
 const user = {
   email: 'jones@example.com',

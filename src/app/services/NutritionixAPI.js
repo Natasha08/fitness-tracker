@@ -1,6 +1,6 @@
 import { nutritionixSearchResults, searchError } from 'app/reducers/nutritionix';
 import { createApiService } from 'app/helpers/services';
-import { INSTANT_SEARCH_ENDPOINT, INSTANT_SEARCH_URL } from '__mocks__/helpers/required_keys';
+import { INSTANT_SEARCH_ENDPOINT, INSTANT_SEARCH_URL, NATURAL_SEARCH_URL } from '__mocks__/helpers/required_keys';
 
 export const API_VERSION = '/v2' ;
 
@@ -8,14 +8,23 @@ const reducerPath = 'NutritionixAPI';
 const baseUrl = INSTANT_SEARCH_ENDPOINT + API_VERSION;
 const tagTypes = ['nutritionix-api'];
 
+const params = (query) => ({params: `query=${query}`});
+
 const endpoints = {
   instantSearch: {
     url: INSTANT_SEARCH_URL,
     method: 'GET',
-    query: ({url, method}) => (search) => ({
+    params,
+    onSuccess: nutritionixSearchResults,
+    onFailure: searchError,
+  },
+  naturalSearch: {
+    url: NATURAL_SEARCH_URL,
+    method: 'POST',
+    query: ({url, method}) => (query) => ({
       url,
       method,
-      params: `query=${search}`
+      body: {query}
     }),
     onSuccess: nutritionixSearchResults,
     onFailure: searchError,
@@ -44,5 +53,5 @@ const NutritionixAPI = createApiService({
   - camelcase
 */
 
-export const {useInstantSearchMutation} = NutritionixAPI;
+export const {useInstantSearchMutation, useNaturalSearchMutation} = NutritionixAPI;
 export default NutritionixAPI;
