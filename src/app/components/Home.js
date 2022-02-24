@@ -31,7 +31,6 @@ export default function Home() {
               <Route path="/" element={<div></div>}/>
               <Route path="/nutrition" element={<Nutrition/>}/>
               <Route path="/daily" element={<div></div>} />
-              <Route path="/workouts" element={<div></div>} />
               <Route path="/settings" element={<div></div>} />
             </Routes>
           </div>

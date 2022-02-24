@@ -16,3 +16,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 ### Production Build
 `npm run build`
 
+`npm run install -g serve`
+`npm run serve`
+
