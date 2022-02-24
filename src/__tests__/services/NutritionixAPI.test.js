@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import fetchMock from 'jest-fetch-mock';
 
 import NutritionixAPIService, { useInstantSearchMutation, useNaturalSearchMutation } from 'app/services/NutritionixAPI';
-import { bananaResult } from '__tests__/fixtures/nutritionix/natural_search';
+import { naturalSearchExpectedResults } from '__tests__/fixtures/nutritionix/natural_search';
 
 const search = 'banana';
 const commonFoodItem = {
@@ -81,8 +81,8 @@ describe('NutritionixAPI', () => {
 
       const responseData = _.get(result, 'current[1].data');
       expect(responseData).not.toBeUndefined();
-      const bananaFoodItem = _.first(responseData.foods);
-      expect(bananaFoodItem).toEqual(expect.objectContaining(bananaResult));
+      const bananaFoodItems = _.first(responseData.foods);
+      expect(bananaFoodItems).toEqual(expect.objectContaining(naturalSearchExpectedResults[0]));
     });
   });
   describe('lookup item mutation', () => {

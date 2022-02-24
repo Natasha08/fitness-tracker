@@ -6,13 +6,22 @@ const nutritionix = createSlice({
   name: 'nutritionix',
   initialState,
   reducers: {
-    nutritionixSearchResults: (state, action) => {
+    instantSearchResults: (state, action) => {
       const newState = _.omit(state, 'instantSearch');
       const {common, branded} = action.payload;
 
       return {
         ...newState,
         instantSearch: [...common, ...branded]
+      };
+    },
+    naturalSearchResults: (state, action) => {
+      const newState = _.omit(state, 'naturalSearch');
+      const {foods} = action.payload;
+
+      return {
+        ...newState,
+        naturalSearch: foods
       };
     },
     searchError: (err) => {
@@ -24,5 +33,5 @@ const nutritionix = createSlice({
   },
 });
 
-export const {nutritionixSearchResults, searchError} = nutritionix.actions;
+export const {instantSearchResults, naturalSearchResults, searchError} = nutritionix.actions;
 export default nutritionix.reducer;
