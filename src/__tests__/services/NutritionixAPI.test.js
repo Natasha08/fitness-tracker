@@ -61,9 +61,14 @@ describe('NutritionixAPI', () => {
     });
   });
 
-  describe('lookup item mutation', () => {
+  describe('natural language mutation', () => {
+    it('hits the endpoint correctly', async () => {
+      return withStore()
+        .dispatch(NutritionixAPIService.endpoints.naturalSearch.initiate(commonFoodItem.food_name))
+        .then((response) => expect(_.keys(response.data)).toEqual(['foods']))
+    });
     it('responds with the correct data', async () => {
-      const wrapper = ({ children }) => {
+      const wrapper = ({children}) => {
         return <Provider store={withStore()}>{children}</Provider>;
       };
 
@@ -80,7 +85,7 @@ describe('NutritionixAPI', () => {
       expect(bananaFoodItem).toEqual(expect.objectContaining(bananaResult));
     });
   });
-  describe('natural language mutation', () => {
+  describe('lookup item mutation', () => {
     it('responds with the correct data', async () => {
     });
   });
