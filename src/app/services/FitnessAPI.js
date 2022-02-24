@@ -1,4 +1,4 @@
-import { loggedIn, loginError } from 'app/reducers/user';
+import { loggedIn } from 'app/reducers/user';
 import { createApiService } from 'app/helpers/services';
 import { LOGIN_ENDPOINT, LOGIN_URL } from '__mocks__/helpers/required_keys';
 export const API_VERSION = '/api/v1';
@@ -11,8 +11,7 @@ const endpoints = {
   login: {
     url: LOGIN_URL,
     method: 'POST',
-    onSuccess: loggedIn,
-    onFailure: loginError
+    onSuccess: loggedIn
   },
 };
 

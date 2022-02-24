@@ -60,9 +60,9 @@ body {
 
 .login-form {
   display: grid;
-  grid-template-columns: 20rem;
-  grid-template-rows: 5rem 5rem 3rem;
+  grid-template-rows: 8rem 5rem 5rem 3rem;
   grid-template-areas:
+    'header'
     'input'
     'input'
     'button';

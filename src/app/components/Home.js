@@ -19,8 +19,6 @@ export default function Home() {
     >
       <ResponsiveDrawer/>
 
-      {user?.error && <div>{user.error}</div>}
-
       {!user?.token ? (
         <div className="Main">
           <LoginForm/>
@@ -30,8 +28,11 @@ export default function Home() {
           <div className="Main">
               Welcome! {user.email}
             <Routes>
-              <Route path="/nutrition" element={<Nutrition/>}/>
               <Route path="/" element={<div></div>}/>
+              <Route path="/nutrition" element={<Nutrition/>}/>
+              <Route path="/daily" element={<div></div>} />
+              <Route path="/workouts" element={<div></div>} />
+              <Route path="/settings" element={<div></div>} />
             </Routes>
           </div>
         </>

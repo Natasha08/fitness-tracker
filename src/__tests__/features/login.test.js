@@ -56,6 +56,7 @@ describe('Login', () => {
       fillIn(screen, 'Enter your Password').with(unknownUser.password);
 
       clickOn(screen, 'Login');
+
       const homePageText = await screen.findByText(/Error/i);
       expect(homePageText).toHaveTextContent('Error logging in, please try again');
     });
