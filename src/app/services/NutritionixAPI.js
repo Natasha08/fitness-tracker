@@ -8,13 +8,11 @@ const reducerPath = 'NutritionixAPI';
 const baseUrl = INSTANT_SEARCH_ENDPOINT + API_VERSION;
 const tagTypes = ['nutritionix-api'];
 
-const params = (query) => ({params: `query=${query}`});
-
 const endpoints = {
   instantSearch: {
     url: INSTANT_SEARCH_URL,
     method: 'GET',
-    params,
+    params: (query) => ({params: `query=${query}`}),
     onSuccess: nutritionixSearchResults,
     onFailure: searchError,
   },
