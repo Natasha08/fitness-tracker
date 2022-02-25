@@ -2,30 +2,32 @@ import React from 'react';
 import { act, renderHook } from '@testing-library/react-hooks';
 import { Provider } from 'react-redux';
 import fetchMock from 'jest-fetch-mock';
+import { appleSearchResults } from '__tests__/fixtures/nutritionix/instant_search';
 
 import NutritionixAPIService, { useInstantSearchMutation, useNaturalSearchMutation } from 'app/services/NutritionixAPI';
-import { naturalSearchExpectedResults } from '__tests__/fixtures/nutritionix/natural_search';
+import { naturalSearchExpectedResults, appleResults } from '__tests__/fixtures/nutritionix/natural_search';
 
 const search = 'apple';
 const commonFoodItem = {
-  food_name: 'apple',
-  serving_unit: 'medium (3" dia)',
-  tag_name: 'apple',
-  serving_qty: 1,
-  common_type: null,
-  tag_id: '384',
-  photo: {thumb: 'https://nix-tag-images.s3.amazonaws.com/384_thumb.jpg'},
-  locale: 'en_US'
+  'food_name': 'apple',
+  'serving_unit': 'medium (3" dia)',
+  'tag_name': 'apple',
+  'serving_qty': 1,
+  'common_type': null,
+  'tag_id': '384',
+  'photo': {'thumb': 'https://nix-tag-images.s3.amazonaws.com/384_thumb.jpg'},
+  'locale': 'en_US'
 };
 
 describe('NutritionixAPI', () => {
-  beforeEach(() => {
-    fetchMock.disableMocks();
-  });
-
-  afterEach(() => {
-    fetchMock.enableMocks();
-  });
+  const instantSearch = {
+    params: search,
+    data: appleSearchResults
+  };
+  const naturalSearch = {
+    data: appleResults
+  };
+  mockServers({naturalSearch, instantSearch});
 
   describe('search store dispatch', () => {
     it('hits the endpoint correctly', async () => {
