@@ -23,7 +23,7 @@ const LoginForm = () => {
       const errorMessage = emptyForm ? '' : 'Error logging in, please try again.';
       setError(errorMessage);
     }
-  }, [result.isLoading]);
+  }, [result.isLoading, emptyForm, result.isError]);
 
   return (
     <form className="login-form">
