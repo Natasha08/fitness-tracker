@@ -33,4 +33,4 @@ const nutritionix = createSlice({
 });
 
 export const {instantSearchResults, naturalSearchResults, searchError} = nutritionix.actions;
-export default nutritionix.reducer;
+export default nutritionix;

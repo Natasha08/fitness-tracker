@@ -16,4 +16,4 @@ const user = createSlice({
 });
 
 export const { loggedIn, APP_RESET } = user.actions;
-export default user.reducer;
+export default user;
