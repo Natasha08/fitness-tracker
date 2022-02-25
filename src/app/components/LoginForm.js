@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -15,16 +15,15 @@ const LoginForm = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const [showPassword, togglePasswordVisibility] = useState(false);
-  const [loginUser] = useLoginMutation({fixedCacheKey: 'user-auth'});
+  const [loginUser, result] = useLoginMutation({fixedCacheKey: 'user-auth'});
+  const emptyForm = _.some(_.map([email, password], _.isEmpty));
 
-  const login = () => {
-    loginUser({email, password})
-    .then((response) => {
-      if (!_.isEmpty(response?.error)) {
-        setError('Error logging in, please try again.');
-      }
-    })
-  };
+  useEffect(() => {
+    if (result.isError) {
+      const errorMessage = emptyForm ? '' : 'Error logging in, please try again.';
+      setError(errorMessage);
+    }
+  }, [result.isLoading]);
 
   return (
     <form className="login-form">
@@ -57,7 +56,7 @@ const LoginForm = () => {
           </InputAdornment>
         )}}
       />
-      <Button variant="contained" onClick={preventDefault(login)}>Login</Button>
+      <Button variant="contained" onClick={preventDefault(loginUser, {email, password})}>Login</Button>
     </form>
   )
 }
