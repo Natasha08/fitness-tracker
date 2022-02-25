@@ -26,12 +26,11 @@ export default function Home() {
       ) : (
         <>
           <div className="Main">
-              Welcome! {user.email}
             <Routes>
-              <Route path="/" element={<div></div>}/>
+              <Route path="/" element={<h2>Welcome {user.email}!</h2>}/>
               <Route path="/nutrition" element={<Nutrition/>}/>
-              <Route path="/daily" element={<div></div>} />
-              <Route path="/settings" element={<div></div>} />
+              <Route path="/daily" element={<h2>Daily</h2>} />
+              <Route path="/settings" element={<h2>Settings</h2>} />
             </Routes>
           </div>
         </>

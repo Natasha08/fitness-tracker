@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 import { useLoginMutation } from 'app/services/FitnessAPI';
 import { onChange, preventDefault } from 'app/helpers/events';
@@ -56,7 +58,28 @@ const LoginForm = () => {
           </InputAdornment>
         )}}
       />
-      <Button variant="contained" onClick={preventDefault(loginUser, {email, password})}>Login</Button>
+      <Box sx={{m: 1, position: 'relative'}}>
+        <Button
+          variant="contained"
+          disabled={result?.status === 'pending'}
+          onClick={preventDefault(loginUser, {email, password})}
+        >
+          Login
+        </Button>
+        {result?.status === 'pending' && (
+          <CircularProgress
+            size={24}
+            sx={{
+              color: 'blue',
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              marginTop: '-12px',
+              marginLeft: '-12px',
+            }}
+          />
+        )}
+      </Box>
     </form>
   )
 }
