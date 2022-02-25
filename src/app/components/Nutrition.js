@@ -60,7 +60,7 @@ export default function Nutrition() {
 
       {!_.isEmpty(selectedFood) && (
         <div>
-          <span>Name: {selectedFood.food_name}</span><img src={selectedFood.photo.thumb}></img>
+          <span>Name: {selectedFood.food_name}</span><img src={selectedFood.photo.thumb} alt={selectedFood.food_name}></img>
           <div>Total Calories: {selectedFood.nf_calories}</div>
           <div>Total Fat: {selectedFood.nf_total_fat}</div>
           <div>Total Protein: {selectedFood.nf_total_fat}</div>

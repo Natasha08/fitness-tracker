@@ -1,5 +1,5 @@
 export const appleResults = {
-  "foods": [{
+  'foods': [{
     'food_name': 'apple',
     'brand_name': null,
     'serving_qty': 1,

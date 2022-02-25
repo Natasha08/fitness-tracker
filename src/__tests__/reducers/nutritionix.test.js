@@ -8,7 +8,7 @@ describe('Nutritionix Reducer', () => {
     expect(reducer(undefined, {})).toEqual(null);
   });
 
-  describe("Instant Search", () => {
+  describe('Instant Search', () => {
     it('should return instant search results', () => {
       const action = instantSearchResults(appleSearchResults);
       expect(reducer(undefined, action)).toEqual({instantSearch: expectedResults});
@@ -26,7 +26,7 @@ describe('Nutritionix Reducer', () => {
     });
   });
 
-  describe("Natural Search", () => {
+  describe('Natural Search', () => {
     it('should return instant search results', () => {
       const action = naturalSearchResults(appleResults);
 
