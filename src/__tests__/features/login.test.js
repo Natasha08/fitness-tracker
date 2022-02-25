@@ -41,12 +41,7 @@ describe('Login', () => {
       password: 'password'
     };
 
-    mockServers({
-      login: {
-        error: 'unauthorized',
-        data: unknownUser
-      }
-    });
+    mockServers({login: {error: 'unauthorized', data: unknownUser}});
 
     it('displays an error message on login attempt', async () => {
       mountApp();
