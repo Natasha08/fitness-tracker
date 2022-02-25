@@ -21,7 +21,7 @@ export const appleResults = {
     'nix_item_name': null,
     'nix_item_id': null,
     'upc': null,
-    'metadata': {is_raw_food: false},
+    'metadata': {'is_raw_food': false},
     'source': 1,
     'ndb_no': 9003,
     'tags': {
@@ -33,7 +33,6 @@ export const appleResults = {
     },
     'lat': null,
     'lng': null,
-    'meal_type': 3,
     'photo': {
       'thumb': 'https://nix-tag-images.s3.amazonaws.com/384_thumb.jpg',
       'highres': 'https://nix-tag-images.s3.amazonaws.com/384_highres.jpg',

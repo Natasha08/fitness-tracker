@@ -26,7 +26,7 @@ describe('The Nutrition Page', () => {
 
   mockServers({login, naturalSearch, instantSearch});
 
-  it.skip('selects the food item', async () => {
+  it('selects the food item', async () => {
     const {container} = mountApp({user: authenticatedUser}, {initialEntries});
 
     expect(container).toHaveTextContent('Nutrition Page');

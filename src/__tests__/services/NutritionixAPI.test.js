@@ -6,17 +6,15 @@ import fetchMock from 'jest-fetch-mock';
 import NutritionixAPIService, { useInstantSearchMutation, useNaturalSearchMutation } from 'app/services/NutritionixAPI';
 import { naturalSearchExpectedResults } from '__tests__/fixtures/nutritionix/natural_search';
 
-const search = 'banana';
+const search = 'apple';
 const commonFoodItem = {
-  food_name: 'banana',
-  serving_unit: 'medium (7" to 7-7/8" long)',
-  tag_name: 'banana',
+  food_name: 'apple',
+  serving_unit: 'medium (3" dia)',
+  tag_name: 'apple',
   serving_qty: 1,
   common_type: null,
-  tag_id: '399',
-  photo: {
-    thumb: 'https://nix-tag-images.s3.amazonaws.com/399_thumb.jpg',
-  },
+  tag_id: '384',
+  photo: {thumb: 'https://nix-tag-images.s3.amazonaws.com/384_thumb.jpg'},
   locale: 'en_US'
 };
 
@@ -55,9 +53,8 @@ describe('NutritionixAPI', () => {
       const responseData = _.get(result, 'current[1].data');
       expect(responseData).not.toBeUndefined();
       expect(_.keys(responseData)).toEqual(['common', 'branded']);
-      const bananaFoodItem = _.first(responseData.common);
-
-      expect(bananaFoodItem).toEqual(commonFoodItem);
+      const appleFoodItem = _.first(responseData.common);
+      expect(appleFoodItem).toEqual(commonFoodItem);
     });
   });
 
@@ -68,9 +65,9 @@ describe('NutritionixAPI', () => {
         .then((response) => expect(_.keys(response.data)).toEqual(['foods']))
     });
     it('responds with the correct data', async () => {
-      const wrapper = ({children}) => {
-        return <Provider store={withStore()}>{children}</Provider>;
-      };
+      const wrapper = ({children}) => (
+        <Provider store={withStore()}>{children}</Provider>
+      );
 
       const {result, waitForNextUpdate} = renderHook(() => useNaturalSearchMutation(), {wrapper});
       const [naturalSearch] = result.current;
@@ -81,12 +78,8 @@ describe('NutritionixAPI', () => {
 
       const responseData = _.get(result, 'current[1].data');
       expect(responseData).not.toBeUndefined();
-      const bananaFoodItems = _.first(responseData.foods);
-      expect(bananaFoodItems).toEqual(expect.objectContaining(naturalSearchExpectedResults[0]));
-    });
-  });
-  describe('lookup item mutation', () => {
-    it('responds with the correct data', async () => {
+      const appleFoodItem = _.first(responseData.foods);
+      expect(appleFoodItem).toEqual(expect.objectContaining(naturalSearchExpectedResults[0]));
     });
   });
 });
