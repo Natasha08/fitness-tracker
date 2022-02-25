@@ -2,7 +2,7 @@ export const appleSearchResults = {
   'common': [
     {
       'food_name': 'apple',
-      'serving_unit': 'medium (3\" dia)',
+      'serving_unit': 'medium (3" dia)',
       'tag_name': 'apple',
       'serving_qty': 1,
       'common_type': null,
@@ -26,7 +26,7 @@ export const appleSearchResults = {
     },
     {
       'food_name': 'apple pie',
-      'serving_unit': 'piece (1/8 of 9\" dia)',
+      'serving_unit': 'piece (1/8 of 9" dia)',
       'tag_name': 'Apple pie',
       'serving_qty': 1,
       'common_type': null,

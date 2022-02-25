@@ -1,7 +1,6 @@
 import React from 'react';
 import { act, renderHook } from '@testing-library/react-hooks';
 import { Provider } from 'react-redux';
-import fetchMock from 'jest-fetch-mock';
 import { appleSearchResults } from '__tests__/fixtures/nutritionix/instant_search';
 
 import NutritionixAPIService, { useInstantSearchMutation, useNaturalSearchMutation } from 'app/services/NutritionixAPI';
