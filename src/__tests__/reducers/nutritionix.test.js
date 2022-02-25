@@ -1,9 +1,11 @@
-import reducer from 'app/reducers/nutritionix';
+import nutritionix from 'app/reducers/nutritionix';
 import { appleSearchResults, expectedResults } from '__tests__/fixtures/nutritionix/instant_search';
 import { appleResults, naturalSearchExpectedResults } from '__tests__/fixtures/nutritionix/natural_search';
 import { instantSearchResults, naturalSearchResults } from  'app/reducers/nutritionix';
 
 describe('Nutritionix Reducer', () => {
+  const reducer = nutritionix.reducer;
+
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual(null);
   });
