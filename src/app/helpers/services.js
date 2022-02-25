@@ -41,7 +41,7 @@ const buildEndpoint = (builder, endpoint) => {
     query: query(config),
     onQueryStarted: onQueryStarted(config),
     extraReducers,
-  })
+  });
 }
 
 export const createApiService = ({

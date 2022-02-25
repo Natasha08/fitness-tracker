@@ -16,7 +16,7 @@ const LoginForm = () => {
   const [error, setError] = useState(null);
   const [showPassword, togglePasswordVisibility] = useState(false);
   const [loginUser, result] = useLoginMutation({fixedCacheKey: 'user-auth'});
-  const emptyForm = _.some(_.map([email, password], _.isEmpty));
+  const emptyForm = _.every(_.map([email, password], _.isEmpty));
 
   useEffect(() => {
     if (result.isError) {
