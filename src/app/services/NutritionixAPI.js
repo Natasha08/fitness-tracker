@@ -1,4 +1,4 @@
-import { instantSearchResults, searchError } from 'app/reducers/nutritionix';
+import { instantSearchResults, searchError, naturalSearchResults } from 'app/reducers/nutritionix';
 import { createApiService } from 'app/helpers/services';
 import { INSTANT_SEARCH_ENDPOINT, INSTANT_SEARCH_URL, NATURAL_SEARCH_URL } from '__mocks__/helpers/required_keys';
 
@@ -24,7 +24,7 @@ const endpoints = {
       method,
       body: {query}
     }),
-    onSuccess: instantSearchResults,
+    onSuccess: naturalSearchResults,
     onFailure: searchError,
   },
 };

@@ -4,16 +4,18 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
 
 import { onChange } from 'app/helpers/events';
-import { useInstantSearchMutation } from 'app/services/NutritionixAPI';
+import { useInstantSearchMutation, useNaturalSearchMutation } from 'app/services/NutritionixAPI';
 import { useSelector } from 'react-redux';
 
 export default function Nutrition() {
   const [search, setSeach] = useState('');
   const [foodItem, setFoodItem] = useState({});
   const [instantSearch] = useInstantSearchMutation({fixedCacheKey: 'nutritionix-instant-search'});
+  const [naturalSearch] = useNaturalSearchMutation({fixedCacheKey: 'nutritionix-natural-search'});
 
   const nutritionix = useSelector(({nutritionix}) => nutritionix);
-  const searchResults = nutritionix?.instantSearch ?? [];
+  const instantSearchResults = nutritionix?.instantSearch ?? [];
+  const selectedFood = _.first(nutritionix?.naturalSearch) ?? [];
 
   const searchNow = (searchTerm) => {
     if (!_.isEmpty(searchTerm)) {
@@ -28,13 +30,17 @@ export default function Nutrition() {
 
       <Autocomplete
         disablePortal
-        options={searchResults}
+        options={instantSearchResults}
         getOptionLabel={(option) => option?.food_name ?? ''}
         isOptionEqualToValue={(option, value) => option.tag_id === value.tag_id}
         sx={{width: 400}}
         value={foodItem}
         onChange={(event, newValue) => {
           setFoodItem(newValue);
+
+          if (!_.isEmpty(newValue)) {
+            naturalSearch(newValue.food_name);
+          }
         }}
         renderInput={(params) => (
           <TextField
@@ -51,6 +57,16 @@ export default function Nutrition() {
           </Box>
         )}
       />
+
+      {!_.isEmpty(selectedFood) && (
+        <div>
+          <span>Name: {selectedFood.food_name}</span><img src={selectedFood.photo.thumb}></img>
+          <div>Total Calories: {selectedFood.nf_calories}</div>
+          <div>Total Fat: {selectedFood.nf_total_fat}</div>
+          <div>Total Protein: {selectedFood.nf_total_fat}</div>
+          <div>Total Carbohydrates: {selectedFood.nf_total_carbohydrate}</div>
+        </div>
+      )}
     </div>
   );
 }

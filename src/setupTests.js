@@ -41,7 +41,5 @@ afterEach(() => {
 });
 
 global.mountApp = (state={}, {initialEntries}={}) => (
-  render(
-    <App providedStore={withStore(state)} initialEntries={initialEntries}/>
-  )
+  render(<App providedStore={withStore(state)} initialEntries={initialEntries}/>)
 );

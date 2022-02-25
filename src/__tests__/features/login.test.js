@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/react';
+import { mockServers } from '__mocks__';
 
 const user = {
   email: 'jones@example.com',
@@ -8,11 +9,9 @@ const token = 'token';
 const authenticatedUser = {...user, token};
 
 describe('Login', () => {
-  const loginResponse = {
-    data: authenticatedUser
-  };
+  const login = {data: authenticatedUser};
 
-  mockFitnessAPI({loginResponse});
+  mockServers({login});
 
   it('logs the user in', async () => {
     mountApp();
@@ -42,9 +41,9 @@ describe('Login', () => {
       password: 'password'
     };
 
-    mockFitnessAPI({
-      loginResponse: {
-        config: {failure: 'unauthorized'},
+    mockServers({
+      login: {
+        error: 'unauthorized',
         data: unknownUser
       }
     });

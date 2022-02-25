@@ -13,18 +13,6 @@ export const appleSearchResults = {
       'locale': 'en_US'
     },
     {
-      'food_name': 'apricot',
-      'serving_unit': 'apricot',
-      'tag_name': 'apricot',
-      'serving_qty': 1,
-      'common_type': null,
-      'tag_id': '388',
-      'photo': {
-        'thumb': 'https://nix-tag-images.s3.amazonaws.com/388_thumb.jpg'
-      },
-      'locale': 'en_US'
-    },
-    {
       'food_name': 'appletini',
       'serving_unit': 'cocktail',
       'tag_name': 'appletini',

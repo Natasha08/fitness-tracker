@@ -1,6 +1,6 @@
 import reducer from 'app/reducers/nutritionix';
 import { appleSearchResults, expectedResults } from '__tests__/fixtures/nutritionix/instant_search';
-import { bananaResults, naturalSearchExpectedResults } from '__tests__/fixtures/nutritionix/natural_search';
+import { appleResults, naturalSearchExpectedResults } from '__tests__/fixtures/nutritionix/natural_search';
 import { instantSearchResults, naturalSearchResults } from  'app/reducers/nutritionix';
 
 describe('Nutritionix Reducer', () => {
@@ -28,18 +28,18 @@ describe('Nutritionix Reducer', () => {
 
   describe("Natural Search", () => {
     it('should return instant search results', () => {
-      const action = naturalSearchResults(bananaResults);
+      const action = naturalSearchResults(appleResults);
 
       expect(reducer(undefined, action)).toEqual({naturalSearch: naturalSearchExpectedResults});
     });
 
     it('works with plain actions', () => {
-      const action = {type: 'nutritionix/naturalSearchResults', payload: bananaResults};
+      const action = {type: 'nutritionix/naturalSearchResults', payload: appleResults};
       expect(reducer(undefined, action)).toEqual({naturalSearch: naturalSearchExpectedResults});
     });
 
     it('should return previous state', () => {
-      const action = naturalSearchResults(bananaResults);
+      const action = naturalSearchResults(appleResults);
       const previousState = {instantSearch: [{food_name: 'apple'}]};
       expect(reducer(previousState, action)).toEqual({...previousState, naturalSearch: naturalSearchExpectedResults});
     });

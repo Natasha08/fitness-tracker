@@ -16,11 +16,10 @@ const nutritionix = createSlice({
       };
     },
     naturalSearchResults: (state, action) => {
-      const newState = _.omit(state, 'naturalSearch');
       const {foods} = action.payload;
 
       return {
-        ...newState,
+        ...state,
         naturalSearch: foods
       };
     },

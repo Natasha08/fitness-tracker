@@ -13,7 +13,7 @@ const token = 'token';
 const data = {...user, token};
 
 describe('FitnessAPI', () => {
-  mockFitnessAPI({loginResponse: {data}});
+  mockServers({login: {data}});
 
   describe('login store dispatch', () => {
     it('hits the endpoint correctly', async () => {
