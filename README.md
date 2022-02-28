@@ -6,9 +6,9 @@
 
 
 ### Major Dependencies
-[Nutritionix API](https://developer.nutritionix.com/)
-[Create React App](https://create-react-app.dev/docs/getting-started)
-[Redux](https://redux.js.org/api/api-reference)
+- [Nutritionix API](https://developer.nutritionix.com/)
+- [Create React App](https://create-react-app.dev/docs/getting-started)
+- [Redux](https://redux.js.org/api/api-reference)
 
 ### Setup
 `cp .env.example .env`
