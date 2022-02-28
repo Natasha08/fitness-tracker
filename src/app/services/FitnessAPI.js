@@ -1,6 +1,6 @@
 import { loggedIn } from 'app/reducers/user';
 import { createApiService } from 'app/helpers/services';
-import { LOGIN_ENDPOINT, LOGIN_URL } from '__mocks__/helpers/required_keys';
+import { LOGIN_ENDPOINT, LOGIN_PATH } from '__mocks__/helpers/required_keys';
 export const API_VERSION = '/api/v1';
 
 const reducerPath = 'FitnessAPI';
@@ -9,7 +9,7 @@ const tagTypes = ['user-auth'];
 
 const endpoints = {
   login: {
-    url: LOGIN_URL,
+    url: LOGIN_PATH,
     method: 'POST',
     onSuccess: loggedIn
   },

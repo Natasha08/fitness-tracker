@@ -5,7 +5,7 @@ const upperSnakeCase = (name) => _.split(_.upperCase(name), ' ').join('_');
 export const urlMatchesEndpoint = (name, url, params) => {
   const endpointName = upperSnakeCase(name);
   const startsWithEndpoint = url.startsWith(keys[`${endpointName}_ENDPOINT`]);
-  const endsWithEndpointOrParams = url.endsWith(keys[`${endpointName}_URL`]) || url.endsWith(params);
+  const endsWithEndpointOrParams = url.endsWith(keys[`${endpointName}_PATH`]) || url.endsWith(params);
   return startsWithEndpoint && endsWithEndpointOrParams;
 };
 

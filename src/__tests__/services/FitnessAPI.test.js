@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import fetchMock from 'jest-fetch-mock';
 
 import FitnessAPIService, { useLoginMutation, API_VERSION } from 'app/services/FitnessAPI';
+import { LOGIN_PATH } from '__mocks__/helpers/required_keys';
 
 const user = {
   email: 'jones@example.com',
@@ -26,7 +27,7 @@ describe('FitnessAPI', () => {
 
             expect(method).toBe('POST');
             expect(authorization).toBeNull();
-            expect(url).toBe(`${process.env.REACT_APP_API_BASE}${API_VERSION}/login`);
+            expect(url).toBe(`${process.env.REACT_APP_API_BASE}${API_VERSION}/${LOGIN_PATH}`);
             expect(response).toEqual({data});
           });
     });

@@ -1,10 +1,12 @@
 import React from 'react';
 import { act, renderHook } from '@testing-library/react-hooks';
 import { Provider } from 'react-redux';
-import { appleSearchResults } from '__tests__/fixtures/nutritionix/instant_search';
+import fetchMock from 'jest-fetch-mock';
 
-import NutritionixAPIService, { useInstantSearchMutation, useNaturalSearchMutation } from 'app/services/NutritionixAPI';
+import { appleSearchResults } from '__tests__/fixtures/nutritionix/instant_search';
 import { naturalSearchExpectedResults, appleResults } from '__tests__/fixtures/nutritionix/natural_search';
+import { INSTANT_SEARCH_PATH } from '__mocks__/helpers/required_keys';
+import NutritionixAPIService, { useInstantSearchMutation, useNaturalSearchMutation, API_VERSION } from 'app/services/NutritionixAPI';
 
 const search = 'apple';
 const commonFoodItem = {
@@ -33,6 +35,15 @@ describe('NutritionixAPI', () => {
       return withStore()
         .dispatch(NutritionixAPIService.endpoints.instantSearch.initiate(search))
           .then((response) => {
+            const {method, headers, url} = fetchMock.mock.calls[0][0];
+            const baseUrl = process.env.REACT_APP_NUTRITIONIX_API_BASE;
+            const path = `${API_VERSION}/${INSTANT_SEARCH_PATH}?query=${search}`;
+
+            expect(headers.get('x-app-id')).toBe(process.env.REACT_APP_NUTRITIONIX_APP_ID);
+            expect(headers.get('x-app-key')).toBe(process.env.REACT_APP_NUTRITIONIX_API_KEY);
+            expect(headers.get('x-remote-user-id')).toBe('0');
+            expect(method).toBe('GET');
+            expect(url).toBe(baseUrl + path);
             expect(_.keys(response.data)).toEqual(['common', 'branded']);
           });
     });
