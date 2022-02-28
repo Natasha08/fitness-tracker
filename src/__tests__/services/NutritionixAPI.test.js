@@ -76,6 +76,7 @@ describe('NutritionixAPI', () => {
         .dispatch(NutritionixAPIService.endpoints.naturalSearch.initiate(commonFoodItem.food_name))
         .then((response) => expect(_.keys(response.data)).toEqual(['foods']))
     });
+
     it('responds with the correct data', async () => {
       const wrapper = ({children}) => (
         <Provider store={withStore()}>{children}</Provider>

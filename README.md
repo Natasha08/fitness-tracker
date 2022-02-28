@@ -2,6 +2,14 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/7d0e5044-5970-4640-9ed5-7c3fffddc7c8/deploy-status)](https://app.netlify.com/sites/natasha-fitness-tracker/deploys)
 ![CircleCI](https://circleci.com/gh/Natasha08/fitness-tracker.svg?style=shield&circle-token=80e31fa37d9166471df47398d203d0e5f06f999d)
 
+[Staging site](https://natasha-fitness-tracker.netlify.app/)
+
+
+### Major Dependencies
+[Nutritionix API](https://developer.nutritionix.com/)
+[Create React App](https://create-react-app.dev/docs/getting-started)
+[Redux](https://redux.js.org/api/api-reference)
+
 ### Setup
 `cp .env.example .env`
 
