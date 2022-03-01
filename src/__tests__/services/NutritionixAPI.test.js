@@ -76,13 +76,13 @@ describe('NutritionixAPI', () => {
       return withStore()
         .dispatch(NutritionixAPIService.endpoints.naturalSearch.initiate(search))
         .then((response) => {
-          const {method, headers, body, url} = fetchMock.mock.calls[0][0];
+          const {method, headers, body} = fetchMock.mock.calls[0][0];
 
           expect(headers.get('x-app-id')).toBe(process.env.REACT_APP_NUTRITIONIX_APP_ID);
           expect(headers.get('x-app-key')).toBe(process.env.REACT_APP_NUTRITIONIX_API_KEY);
           expect(headers.get('x-remote-user-id')).toBe('0');
           expect(method).toBe('POST');
-          expect(JSON.parse(body)).toEqual(search);
+          expect(JSON.parse(body.toString())).toEqual(search);
 
           expect(_.keys(response.data)).toEqual(['foods']);
         });
@@ -96,7 +96,7 @@ describe('NutritionixAPI', () => {
       const {result, waitForNextUpdate} = renderHook(() => useNaturalSearchMutation(), {wrapper});
       const [naturalSearch] = result.current;
 
-      act(() => void naturalSearch(commonFoodItem.food_name));
+      act(() => void naturalSearch({query: commonFoodItem.food_name}));
 
       await waitForNextUpdate({timeout: 2000});
 

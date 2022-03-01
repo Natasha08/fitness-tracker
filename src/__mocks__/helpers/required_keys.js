@@ -8,4 +8,4 @@ export const INSTANT_SEARCH_REQUIRED_KEYS = [];
 
 export const NATURAL_SEARCH_ENDPOINT = INSTANT_SEARCH_ENDPOINT;
 export const NATURAL_SEARCH_PATH = 'natural/nutrients';
-export const NATURAL_SEARCH_REQUIRED_KEYS = [];
+export const NATURAL_SEARCH_REQUIRED_KEYS = ['query'];

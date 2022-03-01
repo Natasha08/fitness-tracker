@@ -1,14 +1,18 @@
-import { urlMatchesEndpoint, respondWith } from '__mocks__/helpers/server';
+import { urlMatchesEndpoint, respondWith, requiredKeysPresent } from '__mocks__/helpers/server';
 
-const NutritionixAPI = (url, responses={}) => {
+const NutritionixAPI = (request, responses={}) => {
   const {instantSearch={}, naturalSearch={}} = responses;
 
-  if (urlMatchesEndpoint('instantSearch', url, instantSearch.params)) {
-    return respondWith(instantSearch);
+  if (urlMatchesEndpoint('instantSearch', request.url, instantSearch.params)) {
+    if (requiredKeysPresent(request, 'instantSearch')) {
+      return respondWith(instantSearch);
+    }
   }
 
-  if (urlMatchesEndpoint('naturalSearch', url, naturalSearch.params)) {
-    return respondWith(naturalSearch);
+  if (urlMatchesEndpoint('naturalSearch', request.url, naturalSearch.params)) {
+    if (requiredKeysPresent(request, 'naturalSearch')) {
+      return respondWith(naturalSearch);
+    }
   }
 };
 

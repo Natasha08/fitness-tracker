@@ -1,11 +1,13 @@
-import { urlMatchesEndpoint, respondWith } from '__mocks__/helpers/server';
+import { urlMatchesEndpoint, respondWith, requiredKeysPresent } from '__mocks__/helpers/server';
 
-const FitnessAPI = (url, responses = {}) => {
+const FitnessAPI = (request, responses = {}) => {
   const {login} = responses;
 
-  if (urlMatchesEndpoint('login', url, login.params)) {
-    return respondWith(login);
-  }
+  if (urlMatchesEndpoint('login', request.url, login.params)) {
+    if (requiredKeysPresent(request, 'login')) {
+      return respondWith(login);
+    }
+  };
 };
 
 export default FitnessAPI;

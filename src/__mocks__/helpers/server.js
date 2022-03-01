@@ -1,11 +1,12 @@
 import * as keys from './required_keys';
 
 const upperSnakeCase = (name) => _.split(_.upperCase(name), ' ').join('_');
+const requestJson = ({body}) => !!body ? JSON.parse(body.toString()) : {};
 
 export const respondWith = ({data, error}) => {
   if (error) {
     return Promise.reject(JSON.stringify(error));
-  }
+  } else
   return Promise.resolve(JSON.stringify(data));
 };
 
@@ -16,11 +17,11 @@ export const urlMatchesEndpoint = (name, url, params) => {
   return startsWithEndpoint && endsWithEndpointOrParams;
 };
 
-export const checkRequiredKeysFor = (name, response, next) => {
+export const requiredKeysPresent = (request, name) => {
   const requiredKeys = keys[`${upperSnakeCase(name)}_REQUIRED_KEYS`];
-  const missingKeys = _.difference(requiredKeys, _.keys(response));
+  const missingKeys = _.difference(requiredKeys, _.keys(requestJson(request)));
   const requiredKeysPresent = _.isEmpty(missingKeys);
 
-  if (requiredKeysPresent) return next();
-  throw new Error(`Missing the following keys for ${name}: ${missingKeys}`);
+  if (requiredKeysPresent) return true;
+  return Promise.reject(`Missing the following keys in the api request for ${name}: ${missingKeys}`);
 };
