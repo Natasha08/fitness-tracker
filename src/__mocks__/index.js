@@ -1,28 +1,16 @@
 import fetchMock from 'jest-fetch-mock';
-import { urlMatchesEndpoint } from '__mocks__/helpers/server';
-
-const responseWith = ({data, error}) => {
-  if (error) {
-    return Promise.reject(JSON.stringify(error));
-  }
-  return Promise.resolve(JSON.stringify(data));
-};
+import NutritionixAPI from '__mocks__/services/NutritionixAPI';
+import FitnessAPI from '__mocks__/services/FitnessAPI';
 
 export const mockServers = (responses={}) => {
-  const {instantSearch={}, naturalSearch={}, login={}} = responses;
-
   beforeEach(() => {
     fetchMock.mockResponse(({url}) => {
-      if (urlMatchesEndpoint('instantSearch', url, instantSearch.params)) {
-        return responseWith(instantSearch);
+      if (url.startsWith(process.env.REACT_APP_API_BASE)) {
+        return FitnessAPI(url, responses);
       }
 
-      if (urlMatchesEndpoint('naturalSearch', url, naturalSearch.params)) {
-        return responseWith(naturalSearch);
-      }
-
-      if (urlMatchesEndpoint('login', url)) {
-        return responseWith(login);
+      if (url.startsWith(process.env.REACT_APP_NUTRITIONIX_API_BASE)) {
+        return NutritionixAPI(url, responses);
       }
     });
   });

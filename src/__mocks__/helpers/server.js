@@ -2,6 +2,13 @@ import * as keys from './required_keys';
 
 const upperSnakeCase = (name) => _.split(_.upperCase(name), ' ').join('_');
 
+export const respondWith = ({data, error}) => {
+  if (error) {
+    return Promise.reject(JSON.stringify(error));
+  }
+  return Promise.resolve(JSON.stringify(data));
+};
+
 export const urlMatchesEndpoint = (name, url, params) => {
   const endpointName = upperSnakeCase(name);
   const startsWithEndpoint = url.startsWith(keys[`${endpointName}_ENDPOINT`]);

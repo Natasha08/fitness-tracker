@@ -72,9 +72,20 @@ describe('NutritionixAPI', () => {
 
   describe('natural language mutation', () => {
     it('hits the endpoint correctly', async () => {
+      const search = {query: commonFoodItem.food_name};
       return withStore()
-        .dispatch(NutritionixAPIService.endpoints.naturalSearch.initiate(commonFoodItem.food_name))
-        .then((response) => expect(_.keys(response.data)).toEqual(['foods']))
+        .dispatch(NutritionixAPIService.endpoints.naturalSearch.initiate(search))
+        .then((response) => {
+          const {method, headers, body, url} = fetchMock.mock.calls[0][0];
+
+          expect(headers.get('x-app-id')).toBe(process.env.REACT_APP_NUTRITIONIX_APP_ID);
+          expect(headers.get('x-app-key')).toBe(process.env.REACT_APP_NUTRITIONIX_API_KEY);
+          expect(headers.get('x-remote-user-id')).toBe('0');
+          expect(method).toBe('POST');
+          expect(JSON.parse(body)).toEqual(search);
+
+          expect(_.keys(response.data)).toEqual(['foods']);
+        });
     });
 
     it('responds with the correct data', async () => {

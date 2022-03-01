@@ -32,12 +32,16 @@ global._ = global._ || _;
 _.assign(global, mocks);
 _.assign(global, globalHelpers);
 
-beforeEach(() => {
+beforeAll(() => {
   fetchMock.enableMocks();
 });
 
-afterEach(() => {
+afterAll(() => {
   fetchMock.disableMocks();
+});
+
+beforeEach(() => {
+  fetchMock.resetMocks();
 });
 
 global.mountApp = (state={}, {initialEntries}={}) => (

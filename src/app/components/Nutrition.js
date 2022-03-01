@@ -39,7 +39,7 @@ export default function Nutrition() {
           setFoodItem(newValue);
 
           if (!_.isEmpty(newValue)) {
-            naturalSearch(newValue.food_name);
+            naturalSearch({query: newValue.food_name});
           }
         }}
         renderInput={(params) => (

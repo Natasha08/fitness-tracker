@@ -19,11 +19,6 @@ const endpoints = {
   naturalSearch: {
     url: NATURAL_SEARCH_PATH,
     method: 'POST',
-    query: ({url, method}) => (query) => ({
-      url,
-      method,
-      body: {query}
-    }),
     onSuccess: naturalSearchResults,
     onFailure: searchError,
   },
