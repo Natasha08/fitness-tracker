@@ -29,20 +29,16 @@ const defaultExtraReducers = (builder) => {
   });
 };
 
-const buildEndpoint = (builder, endpoint) => {
-  const {
-    query=defaultQuery,
-    onQueryStarted=defaultOnQueryStarted,
-    extraReducers=defaultExtraReducers,
-    ...config
-  } = endpoint;
-
-  return builder.mutation({
-    query: query(config),
-    onQueryStarted: onQueryStarted(config),
-    extraReducers,
-  });
-}
+const build = ({
+  query=defaultQuery,
+  onQueryStarted=defaultOnQueryStarted,
+  extraReducers=defaultExtraReducers,
+  ...config
+}) => ({
+  query: query(config),
+  onQueryStarted: onQueryStarted(config),
+  extraReducers,
+});
 
 export const createApiService = ({
   reducerPath,
@@ -59,7 +55,7 @@ export const createApiService = ({
     tagTypes,
     endpoints: (builder) => (
       _.mapValues(endpoints, (endpoint) => (
-        buildEndpoint(builder, endpoint)
+        builder.mutation(build(endpoint))
       ))
     )
   });
