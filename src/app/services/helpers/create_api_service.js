@@ -46,19 +46,17 @@ const createApiService = ({
   baseOptions,
   tagTypes=[],
   endpoints
-}) => {
-  return createApi({
-    reducerPath,
-    baseQuery: fetchBaseQuery(baseOptions),
-    extractRehydrationInfo: defaultRehydration,
-    initialState,
-    tagTypes,
-    endpoints: (builder) => (
-      _.mapValues(endpoints, (endpoint) => (
-        builder.mutation(build(endpoint))
-      ))
-    )
-  });
-};
+}) => createApi({
+  reducerPath,
+  baseQuery: fetchBaseQuery(baseOptions),
+  extractRehydrationInfo: defaultRehydration,
+  initialState,
+  tagTypes,
+  endpoints: (builder) => (
+    _.mapValues(endpoints, (endpoint) => (
+      builder.mutation(build(endpoint))
+    ))
+  )
+});
 
 export default createApiService;
