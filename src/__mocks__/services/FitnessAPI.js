@@ -7,7 +7,7 @@ const FitnessAPI = (request, responses = {}) => {
     if (requiredKeysPresent(request, 'login')) {
       return respondWith(login);
     }
-  };
+  }
 };
 
 export default FitnessAPI;

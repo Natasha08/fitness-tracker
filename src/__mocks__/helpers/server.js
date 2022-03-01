@@ -1,7 +1,7 @@
 import * as keys from './required_keys';
 
 const upperSnakeCase = (name) => _.split(_.upperCase(name), ' ').join('_');
-const requestJson = ({body}) => !!body ? JSON.parse(body.toString()) : {};
+const requestJson = ({body}) => !_.isEmpty(body) ? JSON.parse(body.toString()) : {};
 
 export const respondWith = ({data, error}) => {
   if (error) {
