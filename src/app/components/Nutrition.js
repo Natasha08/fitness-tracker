@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
 
-import { onChange } from 'app/helpers/events';
+import { onChange } from 'app/components/helpers/events';
 import { useInstantSearchMutation, useNaturalSearchMutation } from 'app/services/NutritionixAPI';
 import { useSelector } from 'react-redux';
 

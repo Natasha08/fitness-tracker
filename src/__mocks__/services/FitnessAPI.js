@@ -4,9 +4,7 @@ const FitnessAPI = (request, responses = {}) => {
   const {login} = responses;
 
   if (urlMatchesEndpoint('login', request.url, login.params)) {
-    if (requiredKeysPresent(request, 'login')) {
-      return respondWith(login);
-    }
+    if (requiredKeysPresent(request, 'login')) return respondWith(login);
   }
 };
 

@@ -1,5 +1,5 @@
 import { instantSearchResults, searchError, naturalSearchResults } from 'app/reducers/nutritionix';
-import { createApiService } from 'app/helpers/services';
+import createApiService from 'app/services/helpers/create_api_service';
 import { INSTANT_SEARCH_ENDPOINT, INSTANT_SEARCH_PATH, NATURAL_SEARCH_PATH } from '__mocks__/helpers/required_keys';
 
 export const API_VERSION = '/v2' ;

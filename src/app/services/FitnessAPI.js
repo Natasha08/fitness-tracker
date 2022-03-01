@@ -1,5 +1,5 @@
 import { loggedIn } from 'app/reducers/user';
-import { createApiService } from 'app/helpers/services';
+import createApiService from 'app/services/helpers/create_api_service';
 import { LOGIN_ENDPOINT, LOGIN_PATH } from '__mocks__/helpers/required_keys';
 export const API_VERSION = '/api/v1';
 

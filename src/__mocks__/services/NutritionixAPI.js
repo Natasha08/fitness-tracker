@@ -4,15 +4,11 @@ const NutritionixAPI = (request, responses={}) => {
   const {instantSearch={}, naturalSearch={}} = responses;
 
   if (urlMatchesEndpoint('instantSearch', request.url, instantSearch.params)) {
-    if (requiredKeysPresent(request, 'instantSearch')) {
-      return respondWith(instantSearch);
-    }
+    if (requiredKeysPresent(request, 'instantSearch')) return respondWith(instantSearch);
   }
 
   if (urlMatchesEndpoint('naturalSearch', request.url, naturalSearch.params)) {
-    if (requiredKeysPresent(request, 'naturalSearch')) {
-      return respondWith(naturalSearch);
-    }
+    if (requiredKeysPresent(request, 'naturalSearch')) return respondWith(naturalSearch);
   }
 };
 

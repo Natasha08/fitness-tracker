@@ -9,7 +9,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
 import { useLoginMutation } from 'app/services/FitnessAPI';
-import { onChange, preventDefault } from 'app/helpers/events';
+import { onChange, preventDefault } from 'app/components/helpers/events';
 import FormHelperText from '@mui/material/FormHelperText';
 
 const LoginForm = () => {

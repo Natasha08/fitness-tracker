@@ -18,8 +18,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
 import { APP_RESET } from 'app/reducers/user';
-import { navigationList } from 'app/helpers/navigation';
-import { preventDefault } from 'app/helpers/events';
+import { navigationList } from 'app/components/helpers/navigation';
+import { preventDefault } from 'app/components/helpers/events';
 
 const drawerWidth = 240;
 

@@ -40,7 +40,7 @@ const build = ({
   extraReducers,
 });
 
-export const createApiService = ({
+const createApiService = ({
   reducerPath,
   initialState=null,
   baseOptions,
@@ -59,4 +59,6 @@ export const createApiService = ({
       ))
     )
   });
-}
+};
+
+export default createApiService;
