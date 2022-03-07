@@ -16,10 +16,10 @@ describe('Login', () => {
   it('logs the user in', async () => {
     mountApp();
 
-    fillIn(screen, 'Enter your Email').with(user.email);
-    fillIn(screen, 'Enter your Password').with(user.password);
+    fillIn('Enter your Email').with(user.email);
+    fillIn('Enter your Password').with(user.password);
 
-    clickOn(screen, 'Login');
+    clickOn('Login');
 
     const homePageText = await screen.findByText(/Welcome/i);
     expect(homePageText).toHaveTextContent(user.email);
@@ -46,10 +46,10 @@ describe('Login', () => {
     it('displays an error message on login attempt', async () => {
       mountApp();
 
-      fillIn(screen, 'Enter your Email').with(unknownUser.email);
-      fillIn(screen, 'Enter your Password').with(unknownUser.password);
+      fillIn('Enter your Email').with(unknownUser.email);
+      fillIn('Enter your Password').with(unknownUser.password);
 
-      clickOn(screen, 'Login');
+      clickOn('Login');
 
       const homePageText = await screen.findByText(/Error/i);
       expect(homePageText).toHaveTextContent('Error logging in, please try again');

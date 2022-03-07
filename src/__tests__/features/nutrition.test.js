@@ -30,7 +30,7 @@ describe('The Nutrition Page', () => {
     const {container} = mountApp({user: authenticatedUser}, {initialEntries});
 
     expect(container).toHaveTextContent('Nutrition Page');
-    fillIn(screen, 'Search for Foods').with(searchText);
+    fillIn('Search for Foods').with(searchText);
 
     await screen.findAllByText(searchText);
 
@@ -42,12 +42,12 @@ describe('The Nutrition Page', () => {
   it('selects the food item', async () => {
     const {container} = mountApp({user: authenticatedUser}, {initialEntries});
 
-    fillIn(screen, 'Search for Foods').with(searchText);
+    fillIn('Search for Foods').with(searchText);
     await waitFor(() => expect(container).toHaveTextContent(searchText));
 
     const foodItem = _.first(expectedResults);
 
-    clickOn(screen, foodItem.food_name);
+    clickOn(foodItem.food_name);
     await waitFor(() => expect(container).toHaveTextContent('Total'));
 
     expect(container).toHaveTextContent(appleFoodItem.food_name);
