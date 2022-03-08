@@ -1,6 +1,6 @@
 ## Fitness Tracker
-![CircleCI](https://circleci.com/gh/RadialDevGroup/react-redux-example/tree/main.svg?style=svg&circle-token=9b0aef35f3156387509aa72ea4a8ba23b3e0f864)
 
+![CircleCI](https://circleci.com/gh/RadialDevGroup/react-redux-example.svg?style=shield&circle-token=9b0aef35f3156387509aa72ea4a8ba23b3e0f864)
 
 ### Major Dependencies
 - [Create React App](https://create-react-app.dev/docs/getting-started)
