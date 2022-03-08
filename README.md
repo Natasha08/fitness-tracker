@@ -6,9 +6,9 @@
 
 
 ### Major Dependencies
-- [Nutritionix API](https://developer.nutritionix.com/)
 - [Create React App](https://create-react-app.dev/docs/getting-started)
 - [Redux](https://redux.js.org/api/api-reference)
+- [Nutritionix API](https://developer.nutritionix.com/)
 
 ### Setup
 `cp .env.example .env`
@@ -29,7 +29,7 @@ npm i
 Open [http://localhost:3001](http://localhost:3001) to view it in the browser.
 
 Default login:
-`natasha@example.com`
+`radial@example.com`
 `password`
 
 ### Testing
