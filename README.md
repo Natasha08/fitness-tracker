@@ -1,11 +1,14 @@
 ## Fitness Tracker
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7d0e5044-5970-4640-9ed5-7c3fffddc7c8/deploy-status)](https://app.netlify.com/sites/natasha-fitness-tracker/deploys)
+![CircleCI](https://circleci.com/gh/Natasha08/fitness-tracker.svg?style=shield&circle-token=80e31fa37d9166471df47398d203d0e5f06f999d)
 
-![CircleCI](https://circleci.com/gh/RadialDevGroup/react-redux-example.svg?style=shield&circle-token=9b0aef35f3156387509aa72ea4a8ba23b3e0f864)
+[Staging site](https://natasha-fitness-tracker.netlify.app/)
+
 
 ### Major Dependencies
+- [Nutritionix API](https://developer.nutritionix.com/)
 - [Create React App](https://create-react-app.dev/docs/getting-started)
 - [Redux](https://redux.js.org/api/api-reference)
-- [Nutritionix API](https://developer.nutritionix.com/)
 
 ### Setup
 `cp .env.example .env`
@@ -26,7 +29,7 @@ npm i
 Open [http://localhost:3001](http://localhost:3001) to view it in the browser.
 
 Default login:
-`radial@example.com`
+`natasha@example.com`
 `password`
 
 ### Testing
