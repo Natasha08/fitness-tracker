@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom/extend-expect';
 import _ from 'lodash';
+import { MemoryRouter } from 'react-router-dom';
 import fetchMock from 'jest-fetch-mock';
 import { render } from '@testing-library/react';
 import { configureStore } from '@reduxjs/toolkit';
@@ -45,5 +46,5 @@ beforeEach(() => {
 });
 
 global.mountApp = (state={}, {initialEntries}={}) => (
-  render(<App providedStore={withStore(state)} initialEntries={initialEntries}/>)
+  render(<App providedStore={withStore(state)} initialEntries={initialEntries} Router={MemoryRouter}/>)
 );
