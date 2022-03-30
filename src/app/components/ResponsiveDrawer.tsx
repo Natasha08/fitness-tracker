@@ -23,11 +23,11 @@ import { preventDefault } from 'app/components/helpers/events';
 
 const drawerWidth = 240;
 
-function ResponsiveDrawer(props) {
+function ResponsiveDrawer(props: any) {
   const { window } = props;
   const [open, setMobileOpen] = useState(false);
   const dispatch = useDispatch();
-  const user = useSelector(({user}) => user);
+  const user = useSelector(({user}: any) => user);
 
   function logOut() {
     dispatch(APP_RESET());
