@@ -9,14 +9,11 @@ const user = createSlice({
     loggedIn: (state, action) => {
       return action.payload;
     },
-    loginError: (err) => {
-      return {error: 'Error logging in, please try again'};
-    },
     APP_RESET: () => {
       return initialState;
     }
   },
 });
 
-export const { loggedIn, APP_RESET, loginError } = user.actions;
-export default user.reducer;
+export const { loggedIn, APP_RESET } = user.actions;
+export default user;

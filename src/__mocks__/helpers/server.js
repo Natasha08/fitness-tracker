@@ -1,34 +1,27 @@
-import fetchMock from 'jest-fetch-mock';
 import * as keys from './required_keys';
 
-const FAILURE_RESPONSES = {
-  unauthorized: {
-    status: 401,
-    body: {error: 'Unauthorized'}
-  }
+const upperSnakeCase = (name) => _.split(_.upperCase(name), ' ').join('_');
+const requestJson = ({body}) => !_.isEmpty(body) ? JSON.parse(body.toString()) : {};
+
+export const respondWith = ({data, error}) => {
+  if (error) {
+    return Promise.reject(JSON.stringify(error));
+  } else
+  return Promise.resolve(JSON.stringify(data));
 };
 
-export const checkRequiredKeysFor = (name, response, callback) => {
-  const requiredKeys = keys[`${_.upperCase(name)}_REQUIRED_KEYS`];
-   const missingKeys = _.difference(requiredKeys, _.keys(response));
+export const urlMatchesEndpoint = (name, url, params) => {
+  const endpointName = upperSnakeCase(name);
+  const startsWithEndpoint = url.startsWith(keys[`${endpointName}_ENDPOINT`]);
+  const endsWithEndpointOrParams = url.endsWith(keys[`${endpointName}_PATH`]) || url.endsWith(params);
+  return startsWithEndpoint && endsWithEndpointOrParams;
+};
+
+export const requiredKeysPresent = (request, name) => {
+  const requiredKeys = keys[`${upperSnakeCase(name)}_REQUIRED_KEYS`];
+  const missingKeys = _.difference(requiredKeys, _.keys(requestJson(request)));
   const requiredKeysPresent = _.isEmpty(missingKeys);
 
-  if (requiredKeysPresent) return callback();
-  throw new Error(`Missing the following keys for ${name}: ${missingKeys}`);
-};
-
-export const mockFailure = (name, failure) => {
-  fetchMock.mockReject(({url}) => {
-    if (url.startsWith(keys[`${_.upperCase(name)}_ENDPOINT`]) && url.endsWith(keys[`${_.upperCase(name)}_URL`])) {
-      return Promise.reject(JSON.stringify(FAILURE_RESPONSES[failure]));
-    }
-  });
-};
-
-export const mockSuccess = (name, data) => {
-  fetchMock.mockResponse(({url}) => {
-    if (url.startsWith(keys[`${_.upperCase(name)}_ENDPOINT`]) && url.endsWith(keys[`${_.upperCase(name)}_URL`])) {
-      return Promise.resolve(JSON.stringify(data));
-    }
-  });
+  if (requiredKeysPresent) return true;
+  return Promise.reject(`Missing the following keys in the api request for ${name}: ${missingKeys}`);
 };

@@ -1,14 +1,13 @@
-import { fireEvent } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/react';
 
-export const fillIn = (screen, labelText) => ({
+export const fillIn = (labelText) => ({
   with: (value) => {
-    const emailInput = screen.getByLabelText(labelText);
-    fireEvent.change(emailInput, {target: {value}});
-    expect(emailInput.value).toBe(value);
+    const input = screen.getByLabelText(labelText);
+    fireEvent.change(input, {target: {value}});
   }
 });
 
-export const clickOn = (screen, buttonText) => {
+export const clickOn = (buttonText) => {
   fireEvent(
     screen.getByText(buttonText),
     new MouseEvent('click', {

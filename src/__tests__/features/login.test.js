@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react';
-import { fillIn } from './helpers/global_helpers';
+import { mockServers } from '__mocks__';
 
 const user = {
   email: 'jones@example.com',
@@ -9,19 +9,17 @@ const token = 'token';
 const authenticatedUser = {...user, token};
 
 describe('Login', () => {
-  const loginResponse = {
-    data: authenticatedUser
-  };
+  const login = {data: authenticatedUser};
 
-  mockFitnessAPI({loginResponse});
+  mockServers({login});
 
   it('logs the user in', async () => {
     mountApp();
 
-    fillIn(screen, 'Enter your Email').with(user.email);
-    fillIn(screen, 'Enter your Password').with(user.password);
+    fillIn('Enter your Email').with(user.email);
+    fillIn('Enter your Password').with(user.password);
 
-    clickOn(screen, 'Login');
+    clickOn('Login');
 
     const homePageText = await screen.findByText(/Welcome/i);
     expect(homePageText).toHaveTextContent(user.email);
@@ -43,20 +41,16 @@ describe('Login', () => {
       password: 'password'
     };
 
-    mockFitnessAPI({
-      loginResponse: {
-        config: {failure: 'unauthorized'},
-        data: unknownUser
-      }
-    });
+    mockServers({login: {error: 'unauthorized', data: unknownUser}});
 
     it('displays an error message on login attempt', async () => {
       mountApp();
 
-      fillIn(screen, 'Enter your Email').with(unknownUser.email);
-      fillIn(screen, 'Enter your Password').with(unknownUser.password);
+      fillIn('Enter your Email').with(unknownUser.email);
+      fillIn('Enter your Password').with(unknownUser.password);
 
-      clickOn(screen, 'Login');
+      clickOn('Login');
+
       const homePageText = await screen.findByText(/Error/i);
       expect(homePageText).toHaveTextContent('Error logging in, please try again');
     });

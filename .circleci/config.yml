@@ -6,7 +6,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:14.17.5
+      - image: cimg/node:16.14.0
         environment:
           NODE_ENV: test
     working_directory: ~/repo
@@ -18,6 +18,11 @@ jobs:
           name: install dependencies
           command: |
             npm install
+
+      - run:
+          name: run linter
+          command: |
+            npm run lint
 
       - run:
           name: run tests
