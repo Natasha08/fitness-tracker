@@ -46,5 +46,5 @@ beforeEach(() => {
 });
 
 global.mountApp = (state={}, {initialEntries}={}) => (
-  render(<App providedStore={withStore(state)} initialEntries={initialEntries} Router={MemoryRouter}/>)
+  render(<App providedStore={withStore(state)} initialEntries={initialEntries} InitRouter={MemoryRouter}/>)
 );

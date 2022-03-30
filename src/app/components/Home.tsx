@@ -1,14 +1,14 @@
-import React from 'react';
+import * as React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Grid from '@mui/material/Grid';
 
-import Nutrition from 'app/components/Nutrition.js';
-import ResponsiveDrawer from 'app/components/ResponsiveDrawer';
-import LoginForm from 'app/components/LoginForm';
+import Nutrition from './Nutrition';
+import ResponsiveDrawer from './ResponsiveDrawer';
+import LoginForm from './LoginForm';
 
 export default function Home() {
-  const user = useSelector(({user}) => user);
+  const user = useSelector((state: any) => state.user);
 
   return (
     <Grid className="App"
