@@ -10,7 +10,7 @@
     withStore: readonly
     API_VERSION: readonly
     _ : readonly
-  parser: "@babel/eslint-parser"
+  parser: "@typescript-eslint/parser"
   parserOptions:
     requireConfigFile: false
     ecmaFeatures:

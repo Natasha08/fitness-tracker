@@ -2,10 +2,22 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
+import _ from 'lodash';
 
 import { onChange } from 'app/components/helpers/events';
 import { useInstantSearchMutation, useNaturalSearchMutation } from 'app/services/NutritionixAPI';
 import { useSelector } from 'react-redux';
+
+interface Photo {
+  thumb: string
+}
+
+interface Option {
+  food_name: string,
+  tag_id: string,
+  brand_name: string,
+  photo: Photo
+}
 
 export default function Nutrition() {
   const [search, setSeach] = useState('');
@@ -13,7 +25,7 @@ export default function Nutrition() {
   const [instantSearch] = useInstantSearchMutation({fixedCacheKey: 'nutritionix-instant-search'});
   const [naturalSearch] = useNaturalSearchMutation({fixedCacheKey: 'nutritionix-natural-search'});
 
-  const nutritionix = useSelector(({nutritionix}) => nutritionix);
+  const nutritionix = useSelector(({nutritionix}: any) => nutritionix);
   const instantSearchResults = nutritionix?.instantSearch ?? [];
   const selectedFood = _.first(nutritionix?.naturalSearch) ?? [];
 
@@ -31,11 +43,11 @@ export default function Nutrition() {
       <Autocomplete
         disablePortal
         options={instantSearchResults}
-        getOptionLabel={(option) => option?.food_name ?? ''}
-        isOptionEqualToValue={(option, value) => option.tag_id === value.tag_id}
+        getOptionLabel={(option: Option) => option?.food_name ?? ''}
+        isOptionEqualToValue={(option: Option, value: Option) => option.tag_id === value.tag_id}
         sx={{width: 400}}
         value={foodItem}
-        onChange={(event, newValue) => {
+        onChange={(event, newValue: Option) => {
           setFoodItem(newValue);
 
           if (!_.isEmpty(newValue)) {
@@ -50,7 +62,7 @@ export default function Nutrition() {
             onChange={onChange(searchNow)}
           />
         )}
-        renderOption={(props, option) => (
+        renderOption={(props, option: Option) => (
           <Box component="li" sx={{'& > img': {mr: 2, flexShrink: 0}}} {...props}>
             <img width="20" src={option.photo.thumb} alt={option.food_name}/>
             {option.brand_name} {option.food_name}
