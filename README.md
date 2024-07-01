@@ -18,7 +18,7 @@
 
 #### Install Dependenices
 ```
-nvm use
+nvm install (if correct node version not installed) or nvm use
 npm i
 ```
 
